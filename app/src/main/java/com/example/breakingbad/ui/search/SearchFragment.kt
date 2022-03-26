@@ -7,6 +7,6 @@ import com.example.breakingbad.ui.BaseFragment
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
     override fun start() {
-        TODO("Not yet implemented")
+
     }
 }

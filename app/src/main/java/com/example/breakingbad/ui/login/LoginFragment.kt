@@ -13,6 +13,6 @@ import com.example.breakingbad.ui.BaseFragment
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     override fun start() {
-        TODO("Not yet implemented")
+
     }
 }

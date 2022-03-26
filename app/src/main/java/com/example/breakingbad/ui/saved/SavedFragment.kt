@@ -8,6 +8,6 @@ import com.example.breakingbad.ui.BaseFragment
 class SavedFragment : BaseFragment<FragmentSavedBinding>(FragmentSavedBinding::inflate) {
 
     override fun start() {
-        TODO("Not yet implemented")
+
     }
 }

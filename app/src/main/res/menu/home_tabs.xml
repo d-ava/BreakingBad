@@ -3,27 +3,27 @@
 
     <item
 
-        android:id="@+id/homeScreen"
+        android:id="@+id/homeScreenMenu"
         android:icon="@drawable/ic_home"
-        android:title="HOME"/>
+        android:title="@string/home"/>
 
     <item
 
-        android:id="@+id/searchScreen"
+        android:id="@+id/searchScreenMenu"
         android:icon="@drawable/ic_search"
-        android:title="SEARCH"/>
+        android:title="@string/search"/>
 
     <item
 
-        android:id="@+id/savedScreen"
+        android:id="@+id/savedScreenMenu"
         android:icon="@drawable/ic_saved"
-        android:title="SAVED"/>
+        android:title="@string/saved"/>
 
     <item
 
-        android:id="@+id/profileScreen"
+        android:id="@+id/profileScreenMenu"
         android:icon="@drawable/ic_profile"
-        android:title="PROFILE"/>
+        android:title="@string/profile"/>
 
 
 

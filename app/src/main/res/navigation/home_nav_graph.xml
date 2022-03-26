@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_navigation"
+    app:startDestination="@id/homeScreen">
+
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.example.breakingbad.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home"
+        />
+    <fragment
+        android:id="@+id/profileScreen"
+        android:name="com.example.breakingbad.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/savedScreen"
+        android:name="com.example.breakingbad.ui.saved.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved"/>
+    <fragment
+        android:id="@+id/searchScreen"
+        android:name="com.example.breakingbad.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search"
+        />
+
+    <action
+        android:id="@+id/toHomeFragment"
+        app:destination="@+id/homeScreen"
+        app:popUpTo="@id/tab_navigation" />
+
+    <action
+        android:id="@+id/toSearchFragment"
+        app:destination="@+id/searchScreen"
+        app:popUpTo="@id/tab_navigation" />
+
+    <action
+        android:id="@+id/toProfileFragment"
+        app:destination="@+id/profileScreen"
+        app:popUpTo="@id/tab_navigation" />
+
+    <action
+        android:id="@+id/toSavedFragment"
+        app:destination="@+id/savedScreen"
+        app:popUpTo="@id/tab_navigation" />
+
+</navigation>

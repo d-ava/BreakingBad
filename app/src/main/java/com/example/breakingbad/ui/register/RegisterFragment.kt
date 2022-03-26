@@ -7,6 +7,6 @@ import com.example.breakingbad.ui.BaseFragment
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     override fun start() {
-        TODO("Not yet implemented")
+
     }
 }
