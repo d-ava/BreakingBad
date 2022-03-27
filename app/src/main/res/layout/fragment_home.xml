@@ -10,16 +10,17 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCharacters"
-        style="@style/ActionText"
+        style="@style/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13sp"
+        android:layout_marginTop="@dimen/margin16"
         android:text="@string/characters"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/margin16"
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"

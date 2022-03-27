@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ActionText" parent="android:TextAppearance">
+    <style name="titleText" parent="android:TextAppearance">
         <item name="android:textSize">37sp</item>
         <item name="fontFamily">@font/gotham_medium</item>
+        <item name="android:textColor">@color/bb_grey_light</item>
+    </style>
+
+    <style name="descriptionText" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/gotham_book</item>
         <item name="android:textColor">@color/bb_grey_light</item>
     </style>
 
