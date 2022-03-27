@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.breakingbad.R
 import com.example.breakingbad.databinding.BbCharacterItemBinding
 import com.example.breakingbad.extensions.glideExtension
 import com.example.breakingbad.model.BBCharacter
-import kotlin.coroutines.coroutineContext
+import com.squareup.picasso.Picasso
 
 class BBAdapter(
 //    private val onItemClicked: ((bbCharacter: BBCharacter) -> Unit)
@@ -53,12 +54,16 @@ class BBAdapter(
         fun onBind() {
             item = list[adapterPosition]
             binding.tvName.text = item.name
+            Picasso.get().load(item.img).into(binding.ivCharacter)
+
+
 //            binding.root.setOnClickListener {
 //                onItemClicked(item)
 //            }
 
-
+//Glide.with(itemView).load(item.img).error(R.drawable.ic_close).into(binding.ivCharacter)
 //            binding.ivCharacter.glideExtension(item.img)
+//            Glide.with(itemView).load(item.img).into(binding.ivCharacter)
 
         }
 
