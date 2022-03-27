@@ -4,13 +4,13 @@
     <style name="titleText" parent="android:TextAppearance">
         <item name="android:textSize">37sp</item>
         <item name="fontFamily">@font/gotham_medium</item>
-        <item name="android:textColor">@color/bb_grey_light</item>
+        <item name="android:textColor">@color/bb_white</item>
     </style>
 
     <style name="descriptionText" parent="android:TextAppearance">
         <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/gotham_book</item>
-        <item name="android:textColor">@color/bb_grey_light</item>
+        <item name="fontFamily">@font/gotham_bold</item>
+        <item name="android:textColor">@color/bb_white</item>
     </style>
 
 

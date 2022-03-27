@@ -12,7 +12,7 @@ import com.example.breakingbad.ui.BaseFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-var bbList = listOf<BBCharacter>()
+
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
@@ -24,11 +24,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         setRecycler()
         getBBCharacters()
 
-        bbadapter.setData(bbList)
+
     }
 
     private fun setRecycler() {
-        bbadapter = BBAdapter()
+        bbadapter = BBAdapter{
+            view?.makeSnackbar("name is ${it.nickname}")
+        }
         binding.recycler.apply {
             adapter = bbadapter
             layoutManager = GridLayoutManager(requireContext(), 2)
@@ -42,7 +44,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
                     Log.d("---", "$body")
-                    bbList = body
+                    withContext(Dispatchers.Main){
+                        bbadapter.setData(body)
+                    }
                 } else {
                     Log.d("---", "${response.code()}")
                 }

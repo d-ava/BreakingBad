@@ -4,15 +4,12 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.breakingbad.R
 import com.example.breakingbad.databinding.BbCharacterItemBinding
-import com.example.breakingbad.extensions.glideExtension
 import com.example.breakingbad.model.BBCharacter
 import com.squareup.picasso.Picasso
 
 class BBAdapter(
-//    private val onItemClicked: ((bbCharacter: BBCharacter) -> Unit)
+    private val onItemClicked: ((bbCharacter: BBCharacter) -> Unit)
 ) : RecyclerView.Adapter<BBAdapter.BBCharacterViewHolder>() {
 
     private val list: MutableList<BBCharacter> = mutableListOf()
@@ -57,9 +54,9 @@ class BBAdapter(
             Picasso.get().load(item.img).into(binding.ivCharacter)
 
 
-//            binding.root.setOnClickListener {
-//                onItemClicked(item)
-//            }
+            binding.root.setOnClickListener {
+                onItemClicked(item)
+            }
 
 //Glide.with(itemView).load(item.img).error(R.drawable.ic_close).into(binding.ivCharacter)
 //            binding.ivCharacter.glideExtension(item.img)
