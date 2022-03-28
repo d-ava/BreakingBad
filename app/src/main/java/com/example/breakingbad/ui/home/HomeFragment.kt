@@ -2,11 +2,14 @@ package com.example.breakingbad.ui.home
 
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.breakingbad.R
 import com.example.breakingbad.api.NetworkClient
 import com.example.breakingbad.databinding.FragmentHomeBinding
 import com.example.breakingbad.extensions.makeSnackbar
+import com.example.breakingbad.extensions.showDialogMain
 import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.ui.BaseFragment
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +32,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun setRecycler() {
         bbadapter = BBAdapter{
-            view?.makeSnackbar("name is ${it.nickname}")
+              activity?.findNavController(R.id.mainContainer)?.navigate(R.id.toCharacterDetailsFragment)
+//            view?.makeSnackbar("name is ${it.nickname}")
+//            showDialogMain(R.string.app_name, R.string.error)
         }
         binding.recycler.apply {
             adapter = bbadapter
