@@ -5,6 +5,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
 
 import com.example.breakingbad.ui.BaseFragment
@@ -15,24 +17,26 @@ class CharacterDetailsFragment :
     BaseFragment<FragmentCharacterDetailsBinding>(FragmentCharacterDetailsBinding::inflate) {
 
     private val args: CharacterDetailsFragmentArgs by navArgs()
-
-
+    private val appearanceList = mutableListOf<String>()
+    private lateinit var seriesAdapter: SeriesAdapter
     override fun start() {
 
         setListeners()
         onBackPressed()
 
         setCharacterInformation()
+        setRecycler()
+
     }
 
     private fun setCharacterInformation() {
         val character = args.bbCharacterInformation
 
         var occupations = ""
-        for (occ in character.occupation){
-            occupations=occupations + occ + "\n"
+        for (occupation in character.occupation) {
+            occupations = occupations + occupation + "\n"
         }
-//        Log.d("---", occupations)
+
 
         Picasso.get().load(character.img).into(binding.ivCharacter)
         binding.apply {
@@ -44,6 +48,25 @@ class CharacterDetailsFragment :
             tvOccupation.text = occupations
         }
 
+
+        for (series in character.appearance) {
+            appearanceList.add(series.toString() + "bb")
+        }
+        for (series in character.betterCallSaulAppearance) {
+            appearanceList.add(series.toString() + "bcs")
+        }
+
+        Log.d("---", "$appearanceList")
+
+
+    }
+
+    private fun setRecycler() {
+        seriesAdapter = SeriesAdapter()
+        binding.recyclerViewSeries.adapter = seriesAdapter
+        binding.recyclerViewSeries.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        seriesAdapter.setData(appearanceList)
     }
 
     private fun setListeners() {

@@ -52,7 +52,7 @@
             style="@style/bigButton"
             android:layout_width="155dp"
             android:layout_height="35dp"
-            android:text="SAVE"
+            android:text="@string/save"
             app:layout_constraintBottom_toTopOf="@+id/tvNickname"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,16 +70,16 @@
             tools:text="NICKNAME" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:lineSpacingExtra="@dimen/margin16"
             android:id="@+id/tvOccupation"
             style="@style/descriptionTextBook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin32"
             android:layout_marginTop="@dimen/margin16"
-            tools:text="occupation"
+            android:lineSpacingExtra="@dimen/margin16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNickname" />
+            app:layout_constraintTop_toBottomOf="@id/tvNickname"
+            tools:text="occupation1 \noccupation2" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDetailsTitle"
@@ -169,13 +169,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvPortrayedTitle" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="130dp"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSeries"
+            android:layout_width="match_parent"
             android:layout_height="130dp"
             android:layout_marginTop="@dimen/margin16"
-            android:background="@color/bb_grey_light"
-            android:src="@drawable/ic_main_logo"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAppearancesTitle" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -184,10 +183,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin16"
-            android:layout_marginTop="162dp"
+            android:layout_marginTop="@dimen/margin16"
             android:text="@string/quotes"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAppearancesTitle" />
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewSeries" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+
+            android:id="@+id/tvQuotes"
+            style="@style/descriptionTextBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin32"
+            android:layout_marginTop="@dimen/margin16"
+            android:lineSpacingExtra="@dimen/margin16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvQuotesTitle"
+            tools:text="occupation" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
