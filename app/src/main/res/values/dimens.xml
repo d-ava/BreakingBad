@@ -2,5 +2,6 @@
 <resources>
 
     <dimen name="margin16">16dp</dimen>
+    <dimen name="margin32">32dp</dimen>
 
 </resources>

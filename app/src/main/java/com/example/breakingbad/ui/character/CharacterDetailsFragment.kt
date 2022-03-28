@@ -5,13 +5,16 @@ import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
+
 import com.example.breakingbad.ui.BaseFragment
+import com.squareup.picasso.Picasso
 
 
 class CharacterDetailsFragment :
     BaseFragment<FragmentCharacterDetailsBinding>(FragmentCharacterDetailsBinding::inflate) {
 
     private val args: CharacterDetailsFragmentArgs by navArgs()
+
 
 
     override fun start() {
@@ -23,7 +26,13 @@ class CharacterDetailsFragment :
     }
 
     private fun setCharacterInformation() {
-        binding.tvName.text = args.bbCharacterInformation.nickname
+
+        Picasso.get().load(args.bbCharacterInformation.img).into(binding.ivCharacter)
+
+        binding.apply {
+            tvName.text = args.bbCharacterInformation.name
+
+        }
 
     }
 

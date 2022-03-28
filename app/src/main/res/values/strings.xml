@@ -8,4 +8,9 @@
     <string name="profile">PROFILE</string>
     <string name="characters">Characters</string>
     <string name="error">ERROR</string>
+    <string name="details">DETAILS</string>
+    <string name="birthday">Birthday</string>
+    <string name="status">Status</string>
+    <string name="portrayed">Portrayed</string>
+    <string name="appearances">APPEARANCES</string>
 </resources>

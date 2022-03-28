@@ -29,6 +29,6 @@ data class BBCharacter(
     val portrayed: String,
     @Json(name = "category")
     val category: String,
-//    @Json(name = "better_call_saul_appearance")
-//    val betterCallSaulAppearance: List<Any>
+    @Json(name = "better_call_saul_appearance")
+    val betterCallSaulAppearance: List<Int?>
 ):Parcelable

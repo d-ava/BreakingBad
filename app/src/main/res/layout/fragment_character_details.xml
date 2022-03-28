@@ -1,30 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bb_control_color"
     tools:context=".ui.character.CharacterDetailsFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="@dimen/margin16"
-        android:layout_marginTop="@dimen/margin16"
-        android:id="@+id/backArrow"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:text="Character details fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin16"
+            android:layout_marginTop="@dimen/margin16"
+            android:src="@drawable/ic_back"
+            android:tint="@color/bb_grey_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCharacter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="@dimen/margin16"
+            android:layout_marginEnd="50dp"
+            android:src="@drawable/ic_main_logo"
+            app:layout_constraintDimensionRatio="W, 333:268"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backArrow" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_marginTop="@dimen/margin16"
+            style="@style/descriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivCharacter"
+            tools:text="Name LastName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNickname"
+            style="@style/descriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin16"
+            android:layout_marginTop="85dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="NICKNAME" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDetails"
+            style="@style/descriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin16"
+            android:layout_marginTop="85dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNickname"
+            android:text="@string/details" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBirthdayTitle"
+            style="@style/descriptionTextBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin32"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetails"
+            android:text="@string/birthday" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBirthday"
+            style="@style/descriptionTextBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin32"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDetails"
+            tools:text="1980.09.00" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStatusTitle"
+            style="@style/descriptionTextBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin32"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBirthdayTitle"
+            android:text="@string/status" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStatus"
+            style="@style/descriptionTextBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin32"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBirthdayTitle"
+            tools:text="Dead" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPortrayedTitle"
+            style="@style/descriptionTextBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin32"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStatusTitle"
+            android:text="@string/portrayed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPortrayed"
+            style="@style/descriptionTextBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin32"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStatusTitle"
+            android:text="@string/portrayed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppereances"
+            style="@style/descriptionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin16"
+            android:layout_marginTop="@dimen/margin16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPortrayedTitle"
+            android:text="@string/appearances" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
