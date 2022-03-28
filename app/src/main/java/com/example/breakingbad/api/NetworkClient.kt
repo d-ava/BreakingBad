@@ -8,7 +8,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 
 object NetworkClient {
 
@@ -37,7 +36,7 @@ object NetworkClient {
             .build()
     }
 
-    private val bbCharactersRetrofit: Retrofit by lazy {
+    private val bBRetrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient(loggingInterceptor()))
@@ -46,7 +45,11 @@ object NetworkClient {
     }
 
     val bbCharactersApi: BBCharactersApi by lazy {
-        bbCharactersRetrofit.create(BBCharactersApi::class.java)
+        bBRetrofit.create(BBCharactersApi::class.java)
+    }
+
+    val bbQuotesApi: BBQuotesApi by lazy {
+        bBRetrofit.create(BBQuotesApi::class.java)
     }
 
 }

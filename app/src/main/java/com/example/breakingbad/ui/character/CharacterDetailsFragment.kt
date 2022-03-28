@@ -2,19 +2,26 @@ package com.example.breakingbad.ui.character
 
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.breakingbad.api.NetworkClient
 import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
+import com.example.breakingbad.model.BBQuotes
 
 import com.example.breakingbad.ui.BaseFragment
+import com.example.breakingbad.ui.home.bbQuotes
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class CharacterDetailsFragment :
     BaseFragment<FragmentCharacterDetailsBinding>(FragmentCharacterDetailsBinding::inflate) {
+
 
     private val args: CharacterDetailsFragmentArgs by navArgs()
     private val appearanceList = mutableListOf<String>()
@@ -26,12 +33,26 @@ class CharacterDetailsFragment :
 
         setCharacterInformation()
         setRecycler()
-
+//        getQuotes()
     }
+
+//    private fun getQuotes() {
+//        lifecycleScope.launchWhenStarted {
+//            withContext(Dispatchers.IO) {
+//                val response = NetworkClient.bbQuotesApi.getQuotes()
+//                val body = response.body()
+//                if (response.isSuccessful && body != null) {
+//                    Log.d("---", "$body")
+//                    bbQuotes = body
+//                }
+//            }
+//        }
+//    }
 
     private fun setCharacterInformation() {
         val character = args.bbCharacterInformation
 
+        var quotes = ""
         var occupations = ""
         for (occupation in character.occupation) {
             occupations = occupations + occupation + "\n"
@@ -48,6 +69,7 @@ class CharacterDetailsFragment :
             tvOccupation.text = occupations
         }
 
+        //series
 
         for (series in character.appearance) {
             appearanceList.add(series.toString() + "bb")
@@ -58,7 +80,14 @@ class CharacterDetailsFragment :
 
         Log.d("---", "$appearanceList")
 
-
+        //quotes
+        for (quote in bbQuotes) {
+            if (quote.author.lowercase() == character.name.lowercase()) {
+                quotes = quotes + quote.quote + "\n"
+            }
+        }
+//        Log.d("---", "quotes list $quotes")
+        binding.tvQuotes.text = quotes
     }
 
     private fun setRecycler() {

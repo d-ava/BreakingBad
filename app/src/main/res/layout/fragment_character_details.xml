@@ -196,10 +196,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin32"
             android:layout_marginTop="@dimen/margin16"
+            android:layout_marginEnd="@dimen/margin32"
             android:lineSpacingExtra="@dimen/margin16"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvQuotesTitle"
-            tools:text="occupation" />
+            tools:text="quotes" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
