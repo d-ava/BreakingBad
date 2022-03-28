@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="titleText" parent="android:TextAppearance">
+    <style name="bigButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:fontFamily">@font/gotham_bold</item>
+
+
+    </style>
+
+    <style name="titleText" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">37sp</item>
         <item name="fontFamily">@font/gotham_medium</item>
         <item name="android:textColor">@color/bb_white</item>
     </style>
 
-    <style name="descriptionText" parent="android:TextAppearance">
+    <style name="descriptionText" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/gotham_bold</item>
         <item name="android:textColor">@color/bb_white</item>
     </style>
 
-    <style name="descriptionTextBook" parent="android:TextAppearance">
+    <style name="descriptionTextBook" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/gotham_book</item>
         <item name="android:textColor">@color/bb_white</item>
     </style>
-
-
 
 
 </resources>

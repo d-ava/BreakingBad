@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingbad.R
 import com.example.breakingbad.api.NetworkClient
 import com.example.breakingbad.databinding.FragmentHomeBinding
+
 import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.extensions.showDialogMain
 import com.example.breakingbad.model.BBCharacter

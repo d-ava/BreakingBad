@@ -16,7 +16,6 @@ class CharacterDetailsFragment :
     private val args: CharacterDetailsFragmentArgs by navArgs()
 
 
-
     override fun start() {
 
         setListeners()
@@ -27,11 +26,15 @@ class CharacterDetailsFragment :
 
     private fun setCharacterInformation() {
 
-        Picasso.get().load(args.bbCharacterInformation.img).into(binding.ivCharacter)
-
+        val character = args.bbCharacterInformation
+        Picasso.get().load(character.img).into(binding.ivCharacter)
         binding.apply {
-            tvName.text = args.bbCharacterInformation.name
-
+            tvName.text = character.name
+            tvBirthday.text = character.birthday
+            tvNickname.text = character.nickname.uppercase()
+            tvPortrayed.text = character.portrayed
+            tvStatus.text = character.status
+            tvOccupation.text = "something \n\nsomething2 \n\nsomething3 \n\nsomething4 "
         }
 
     }
