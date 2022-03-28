@@ -12,6 +12,7 @@ import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.extensions.showDialogMain
 import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.ui.BaseFragment
+import com.example.breakingbad.ui.character.CharacterDetailsFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -32,7 +33,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun setRecycler() {
         bbadapter = BBAdapter{
-              activity?.findNavController(R.id.mainContainer)?.navigate(R.id.toCharacterDetailsFragment)
+            val action = CharacterDetailsFragmentDirections.toCharacterDetailsFragment(it)
+              activity?.findNavController(R.id.mainContainer)?.navigate(action)
 //            view?.makeSnackbar("name is ${it.nickname}")
 //            showDialogMain(R.string.app_name, R.string.error)
         }

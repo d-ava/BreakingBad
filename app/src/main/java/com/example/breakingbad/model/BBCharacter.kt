@@ -1,9 +1,12 @@
 package com.example.breakingbad.model
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class BBCharacter(
     @Json(name = "char_id")
@@ -26,6 +29,6 @@ data class BBCharacter(
     val portrayed: String,
     @Json(name = "category")
     val category: String,
-    @Json(name = "better_call_saul_appearance")
-    val betterCallSaulAppearance: List<Any>
-)
+//    @Json(name = "better_call_saul_appearance")
+//    val betterCallSaulAppearance: List<Any>
+):Parcelable
