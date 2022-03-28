@@ -70,6 +70,7 @@
             tools:text="NICKNAME" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:lineSpacingExtra="@dimen/margin16"
             android:id="@+id/tvOccupation"
             style="@style/descriptionTextBook"
             android:layout_width="wrap_content"

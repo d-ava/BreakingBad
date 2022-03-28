@@ -1,5 +1,6 @@
 package com.example.breakingbad.ui.character
 
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
@@ -25,8 +26,14 @@ class CharacterDetailsFragment :
     }
 
     private fun setCharacterInformation() {
-
         val character = args.bbCharacterInformation
+
+        var occupations = ""
+        for (occ in character.occupation){
+            occupations=occupations + occ + "\n"
+        }
+//        Log.d("---", occupations)
+
         Picasso.get().load(character.img).into(binding.ivCharacter)
         binding.apply {
             tvName.text = character.name
@@ -34,7 +41,7 @@ class CharacterDetailsFragment :
             tvNickname.text = character.nickname.uppercase()
             tvPortrayed.text = character.portrayed
             tvStatus.text = character.status
-            tvOccupation.text = "something \n\nsomething2 \n\nsomething3 \n\nsomething4 "
+            tvOccupation.text = occupations
         }
 
     }
