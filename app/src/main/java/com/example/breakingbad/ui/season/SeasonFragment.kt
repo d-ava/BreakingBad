@@ -36,24 +36,13 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
                 val response = NetworkClient.bbEpisodesApi.getEpisodes()
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
-                    Log.d("---", "all series $body")
-                    if ("b" in ser){
-                        for (series in body){
-                            Unit
-//                            if (ser[0] in series.season){
-//                                seriesList.add(series)
-//                            }
-                        }
-                    }else if ("s" in ser){
-                       seriesList = body.filter {ser[0] in it.series}
-                        Log.d("---", "series in $seriesList")
-                        Log.d("---", "${ser[0]}")
-                    }
+//                    Log.d("---", "all series $body")
+                  Log.d("---", "season 1 = ${body.filter { it.season == "1" }}")
                 }
             }
         }
 
-        Log.d("---", "series $seriesList")
+
     }
 
     private fun setListeners() {

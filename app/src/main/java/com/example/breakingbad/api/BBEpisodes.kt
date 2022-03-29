@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface BBEpisodes {
-    @GET("episodes")
+    @GET("episodes?series=Better+Call+Saul")
     suspend fun getEpisodes(): Response<List<BBEpisodes>>
 }
