@@ -96,7 +96,7 @@ class CharacterDetailsFragment :
     private fun setRecycler() {
         seriesAdapter = SeriesAdapter{
 //            view?.makeSnackbar(it)
-            val action=CharacterDetailsFragmentDirections.toSeasonFragment()
+            val action=CharacterDetailsFragmentDirections.toSeasonFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
         }
         binding.recyclerViewSeries.adapter = seriesAdapter

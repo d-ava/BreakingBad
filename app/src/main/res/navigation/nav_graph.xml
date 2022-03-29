@@ -19,6 +19,7 @@
         <argument
             android:name="bb_character_information"
             app:argType="com.example.breakingbad.model.BBCharacter" />
+
     </fragment>
 
     <action
@@ -29,7 +30,11 @@
         android:id="@+id/seasonFragment"
         android:name="com.example.breakingbad.ui.season.SeasonFragment"
         android:label="fragment_season"
-        tools:layout="@layout/fragment_season" />
+        tools:layout="@layout/fragment_season">
+        <argument
+            android:name="series"
+            app:argType="string"/>
+    </fragment>
 
     <action
         android:id="@+id/toSeasonFragment"
