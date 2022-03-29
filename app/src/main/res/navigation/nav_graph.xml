@@ -10,23 +10,30 @@
         android:id="@+id/navHomeFragment"
         android:name="com.example.breakingbad.ui.navHome.NavHomeFragment"
         android:label="fragment_nav_home"
-        tools:layout="@layout/fragment_home"
-         />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="com.example.breakingbad.ui.character.CharacterDetailsFragment"
         android:label="fragment_character_details"
-        tools:layout="@layout/fragment_character_details" >
+        tools:layout="@layout/fragment_character_details">
         <argument
             android:name="bb_character_information"
-           app:argType="com.example.breakingbad.model.BBCharacter"/>
-
-
+            app:argType="com.example.breakingbad.model.BBCharacter" />
     </fragment>
 
-    <action android:id="@+id/toCharacterDetailsFragment"
-        app:destination="@id/characterDetailsFragment"
-        />
+    <action
+        android:id="@+id/toCharacterDetailsFragment"
+        app:destination="@id/characterDetailsFragment" />
+
+    <fragment
+        android:id="@+id/seasonFragment"
+        android:name="com.example.breakingbad.ui.season.SeasonFragment"
+        android:label="fragment_season"
+        tools:layout="@layout/fragment_season" />
+
+    <action
+        android:id="@+id/toSeasonFragment"
+        app:destination="@+id/seasonFragment"/>
 
 
 </navigation>

@@ -24,7 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         setRecycler()
         getBBCharacters()
-getQuotes()
+        getQuotes()
 
     }
 

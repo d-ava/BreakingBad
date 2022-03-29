@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavArgs
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.breakingbad.R
 import com.example.breakingbad.api.NetworkClient
 import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
 import com.example.breakingbad.extensions.makeSnackbar
@@ -53,7 +55,7 @@ class CharacterDetailsFragment :
     private fun setCharacterInformation() {
         val character = args.bbCharacterInformation
 
-        var quotes = "■ "
+        var quotes = ""
         var occupations = ""
         for (occupation in character.occupation) {
             occupations = occupations + occupation + "\n"
@@ -84,7 +86,7 @@ class CharacterDetailsFragment :
         //quotes
         for (quote in bbQuotes) {
             if (quote.author.lowercase() == character.name.lowercase()) {
-                quotes = quotes + quote.quote + "\n■ "
+                quotes = quotes + quote.quote + "\n\n"
             }
         }
 //        Log.d("---", "quotes list $quotes")
@@ -93,7 +95,9 @@ class CharacterDetailsFragment :
 
     private fun setRecycler() {
         seriesAdapter = SeriesAdapter{
-            view?.makeSnackbar(it)
+//            view?.makeSnackbar(it)
+            val action=CharacterDetailsFragmentDirections.toSeasonFragment()
+            activity?.findNavController(R.id.mainContainer)?.navigate(action)
         }
         binding.recyclerViewSeries.adapter = seriesAdapter
         binding.recyclerViewSeries.layoutManager =
