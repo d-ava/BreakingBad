@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.breakingbad.api.NetworkClient
 import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
+import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.model.BBQuotes
 
 import com.example.breakingbad.ui.BaseFragment
@@ -52,7 +53,7 @@ class CharacterDetailsFragment :
     private fun setCharacterInformation() {
         val character = args.bbCharacterInformation
 
-        var quotes = ""
+        var quotes = "■ "
         var occupations = ""
         for (occupation in character.occupation) {
             occupations = occupations + occupation + "\n"
@@ -70,12 +71,12 @@ class CharacterDetailsFragment :
         }
 
         //series
-
+//        val listTest = listOf<>()
         for (series in character.appearance) {
-            appearanceList.add(series.toString() + "bb")
+            appearanceList.add(series.toString() + "b")
         }
         for (series in character.betterCallSaulAppearance) {
-            appearanceList.add(series.toString() + "bcs")
+            appearanceList.add(series.toString() + "s")
         }
 
         Log.d("---", "$appearanceList")
@@ -83,7 +84,7 @@ class CharacterDetailsFragment :
         //quotes
         for (quote in bbQuotes) {
             if (quote.author.lowercase() == character.name.lowercase()) {
-                quotes = quotes + quote.quote + "\n"
+                quotes = quotes + quote.quote + "\n■ "
             }
         }
 //        Log.d("---", "quotes list $quotes")
@@ -91,7 +92,9 @@ class CharacterDetailsFragment :
     }
 
     private fun setRecycler() {
-        seriesAdapter = SeriesAdapter()
+        seriesAdapter = SeriesAdapter{
+            view?.makeSnackbar(it)
+        }
         binding.recyclerViewSeries.adapter = seriesAdapter
         binding.recyclerViewSeries.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

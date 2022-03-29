@@ -194,14 +194,15 @@
             style="@style/descriptionTextBook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin32"
             android:layout_marginTop="@dimen/margin16"
-            android:layout_marginEnd="@dimen/margin32"
-            android:lineSpacingExtra="@dimen/margin16"
+            android:lineSpacingExtra="32dp"
+            android:paddingStart="@dimen/margin32"
+            android:paddingEnd="@dimen/margin32"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvQuotesTitle"
-            tools:text="quotes" />
+            tools:text="quotes gdjhgsdf jshdgfjhfgsfdgdf fdg dfgd fg dfg d
+            dfg df dfg df gd fdf jshdfg sjhfd \n sjhgsjhasgda sdajshgd\n asdhgsd" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

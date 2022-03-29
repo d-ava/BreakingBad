@@ -4,9 +4,13 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.breakingbad.R
 import com.example.breakingbad.databinding.BbSeriesItemBinding
+import com.squareup.picasso.Picasso
 
-class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
+class SeriesAdapter(
+    private val onItemClicked: ((series: String) -> Unit)
+) : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
 
     private val list: MutableList<String> = mutableListOf()
 
@@ -44,7 +48,19 @@ class SeriesAdapter : RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
 
         fun onBind() {
             model = list[adapterPosition]
-            binding.tvSeasonNumber.text = model
+            binding.root.setOnClickListener {
+                onItemClicked(model)
+            }
+
+            if ("b" in model) {
+                binding.tvSeasonNumber.text = model
+                binding.ivSeason.setBackgroundResource(R.drawable.ic_breaking_bad_logo)
+
+            }
+            else if ("s" in model){
+                binding.tvSeasonNumber.text = model
+                binding.ivSeason.setBackgroundResource(R.drawable.ic_better_cal_saul_logo)
+            }
         }
 
 

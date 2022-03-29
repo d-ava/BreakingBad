@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="130dp"
-    android:layout_marginStart="@dimen/margin16"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="130dp"
+    android:layout_height="130dp"
+
+    android:layout_marginStart="@dimen/margin16"
     android:background="@color/bb_grey_light">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="130dp"
+        android:id="@+id/ivSeason"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/margin32"
-        android:paddingEnd="@dimen/margin32"
-        android:src="@drawable/ic_breaking_bad_logo"
+
+        android:background="@drawable/ic_breaking_bad_logo"
+        android:scaleType="fitCenter"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSeason"
+        style="@style/descriptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/descriptionText"
-        tools:text = "SEASON \n1"
-        android:paddingBottom="@dimen/margin16"
-        android:textSize="24sp"
+
+        android:layout_marginBottom="8dp"
+        android:text="@string/season"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/tvSeasonNumber"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSeasonNumber"
+        style="@style/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/tvSeasonNumber"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
