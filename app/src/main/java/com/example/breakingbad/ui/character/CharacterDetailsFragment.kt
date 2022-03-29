@@ -75,10 +75,10 @@ class CharacterDetailsFragment :
         //series
 //        val listTest = listOf<>()
         for (series in character.appearance) {
-            appearanceList.add(series.toString() + "b")
+            appearanceList.add(series.toString() + "d") //"d" for breaking ba"D"
         }
         for (series in character.betterCallSaulAppearance) {
-            appearanceList.add(series.toString() + "s")
+            appearanceList.add(series.toString() + "S") //"S" for better call "S"aul
         }
 
         Log.d("---", "$appearanceList")

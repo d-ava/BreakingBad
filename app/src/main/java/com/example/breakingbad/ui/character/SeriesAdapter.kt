@@ -52,12 +52,12 @@ class SeriesAdapter(
                 onItemClicked(model)
             }
 
-            if ("b" in model) {
+            if ("d" in model) {
                 binding.tvSeasonNumber.text = model
                 binding.ivSeason.setBackgroundResource(R.drawable.ic_breaking_bad_logo)
 
             }
-            else if ("s" in model){
+            else if ("S" in model){
                 binding.tvSeasonNumber.text = model
                 binding.ivSeason.setBackgroundResource(R.drawable.ic_better_cal_saul_logo)
             }

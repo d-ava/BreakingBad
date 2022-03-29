@@ -30,14 +30,29 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
     }
 
     private fun getEpisodes() {
-        val ser = args.series
+        val list2 = mutableListOf<com.example.breakingbad.model.BBEpisodes>()
+        val list3 = mutableListOf<com.example.breakingbad.model.BBEpisodes>()
+        val series = args.series
         lifecycleScope.launchWhenStarted {
             withContext(Dispatchers.IO) {
                 val response = NetworkClient.bbEpisodesApi.getEpisodes()
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
-//                    Log.d("---", "all series $body")
-                  Log.d("---", "season 1 = ${body.filter { it.season == "1" }}")
+                    val list4 = body.filter { series[1] in it.series && series[0] in it.season }
+                    Log.d("---", "filtered - $list4")
+//                    for (i in body) {
+//                        if (series[1] in i.series){
+//                            list2.add(i)
+//                        }
+//                    }
+//                    for (i in list2){
+//                        if (series[0] in i.season){
+//                            list3.add(i)
+//                        }
+//                    }
+//
+//                    Log.d("---", "list 3 = $list3")
+
                 }
             }
         }
