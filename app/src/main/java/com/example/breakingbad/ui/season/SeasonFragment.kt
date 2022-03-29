@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingbad.R
 import com.example.breakingbad.api.BBEpisodes
 import com.example.breakingbad.api.NetworkClient
@@ -20,26 +21,45 @@ import kotlinx.coroutines.withContext
 
 
 class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding::inflate) {
-    private var seriesList = listOf<com.example.breakingbad.model.BBEpisodes>()
+
     private val args: SeasonFragmentArgs by navArgs()
+    private lateinit var episodesAdapter: EpisodesAdapter
+
 
     override fun start() {
         setListeners()
-        binding.tvSeason.text = args.series
+
         getEpisodes()
+        setRecycler()
+        setTitle()
+    }
+
+    private fun setTitle(){
+        val series = args.series
+        binding.tvSeason.text = "SEASON ${series[0]}"  //need to solve this. but not now
+    }
+
+    private fun setRecycler(){
+        episodesAdapter = EpisodesAdapter()
+        binding.recycler.adapter = episodesAdapter
+        binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+
+
     }
 
     private fun getEpisodes() {
-        val list2 = mutableListOf<com.example.breakingbad.model.BBEpisodes>()
-        val list3 = mutableListOf<com.example.breakingbad.model.BBEpisodes>()
+
         val series = args.series
         lifecycleScope.launchWhenStarted {
             withContext(Dispatchers.IO) {
                 val response = NetworkClient.bbEpisodesApi.getEpisodes()
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
-                    val list4 = body.filter { series[1] in it.series && series[0] in it.season }
-                    Log.d("---", "filtered - $list4")
+                    withContext(Dispatchers.Main){
+                        episodesAdapter.setData(body.filter { series[1] in it.series && series[0] in it.season })
+                    }
+
+//                    Log.d("---", "filtered - $list4")
 //                    for (i in body) {
 //                        if (series[1] in i.series){
 //                            list2.add(i)
