@@ -23,7 +23,7 @@ var bbQuotes: List<BBQuotes> = listOf()
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private lateinit var bbadapter: BBAdapter
-    private val viewModel:HomeViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
 
 
     override fun start() {
@@ -32,16 +32,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 //        getBBCharacters()
         getBBCharactersFromRoom()
 //        getQuotes()
+//        getQuotesFromRoom()
 
     }
 
-    private fun getBBCharactersFromRoom(){
-       lifecycleScope.launchWhenStarted {
-           viewModel.loadCharacters.collect {
-               Log.d("---", "from room maybe? $it")
-               bbadapter.setData(it)
-           }
-       }
+    private fun getBBCharactersFromRoom() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.loadCharacters.collect {
+                bbadapter.setData(it)
+            }
+        }
     }
 
     private fun getQuotes() {
@@ -56,6 +56,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
         }
     }
+
+//    private fun getQuotesFromRoom() {
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.loadQuotes.collect {
+//                bbQuotes=it
+//
+//            }
+//        }
+//
+//    }
 
     private fun setRecycler() {
         bbadapter = BBAdapter {

@@ -23,7 +23,7 @@ data class BBCharacter(
     val birthday: String,
 
     @Json(name = "occupation")
-//    @Ignore
+
     val occupation: List<String>,
     @Json(name = "img")
     val img: String,
@@ -32,14 +32,14 @@ data class BBCharacter(
     @Json(name = "nickname")
     val nickname: String,
     @Json(name = "appearance")
-//    @Ignore
+
     val appearance: List<Int>,
     @Json(name = "portrayed")
     val portrayed: String,
     @Json(name = "category")
     val category: String,
     @Json(name = "better_call_saul_appearance")
-//    @Ignore
+
     val betterCallSaulAppearance: List<Int?>
 ):Parcelable
 

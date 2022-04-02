@@ -2,6 +2,7 @@ package com.example.breakingbad.ui.character
 
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavArgs
 import androidx.navigation.findNavController
@@ -19,6 +20,7 @@ import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.ui.home.bbQuotes
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 
 
@@ -29,6 +31,8 @@ class CharacterDetailsFragment :
     private val args: CharacterDetailsFragmentArgs by navArgs()
     private val appearanceList = mutableListOf<String>()
     private lateinit var seriesAdapter: SeriesAdapter
+    private val viewModel: CharacterDetailsViewModel by viewModels()
+
     override fun start() {
 
         setListeners()
@@ -36,6 +40,7 @@ class CharacterDetailsFragment :
 
         setCharacterInformation()
         setRecycler()
+
 //        getQuotes()
     }
 
@@ -73,7 +78,7 @@ class CharacterDetailsFragment :
         }
 
         //series
-//        val listTest = listOf<>()
+
         for (series in character.appearance) {
             appearanceList.add(series.toString() + "d") //"d" for breaking ba"D"
         }
@@ -84,14 +89,36 @@ class CharacterDetailsFragment :
         Log.d("---", "$appearanceList")
 
         //quotes
-        for (quote in bbQuotes) {
-            if (quote.author.lowercase() == character.name.lowercase()) {
-                quotes = quotes + quote.quote + "\n\n"
+//        for (quote in bbQuotes) {
+//            if (quote.author.lowercase() == character.name.lowercase()) {
+//                quotes = quotes + quote.quote + "\n\n"
+//            }
+//        }
+//        binding.tvQuotes.text = quotes
+
+
+        viewModel.getQuotesFromAuthor(character.name)
+        lifecycleScope.launchWhenStarted {
+            withContext(Dispatchers.IO){
+                viewModel.getQuotes.collect {
+
+                    Log.d("---", "get quotes from Room = $it")
+                    for (i in it){
+                        quotes=quotes + i.quote + "\n\n"
+                    }
+
+                    withContext(Dispatchers.Main){
+//                        binding.tvQuotes.text = it.joinToString(separator = "\n\n")
+                        binding.tvQuotes.text = quotes
+
+                    }
+                }
             }
         }
-//        Log.d("---", "quotes list $quotes")
-        binding.tvQuotes.text = quotes
+
     }
+
+
 
     private fun setRecycler() {
         seriesAdapter = SeriesAdapter{

@@ -6,18 +6,19 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.breakingbad.App
 import com.example.breakingbad.model.BBCharacter
+import com.example.breakingbad.model.BBQuotes
 
-@Database(entities = [BBCharacter::class], version = 1, exportSchema = false)
-@TypeConverters (Converters::class)
-abstract class BBDatabase :RoomDatabase(){
+@Database(entities = [BBQuotes::class], version = 1, exportSchema = false)
+//@TypeConverters (Converters::class)
+abstract class QuotesDatabase : RoomDatabase() {
 
-    abstract fun bbDao(): BBDao
+    abstract fun quotesDao(): QuotesDao
 
-    companion object{
-        val db by lazy {
+    companion object {
+        val dbQuotes by lazy {
             Room.databaseBuilder(
                 App.appContext!!,
-                BBDatabase::class.java, "bb_table"
+                QuotesDatabase::class.java, "quotes_table"
 
             ).fallbackToDestructiveMigration()
                 .build()
