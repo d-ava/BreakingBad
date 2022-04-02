@@ -1,6 +1,7 @@
 package com.example.breakingbad.ui.home
 
 import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +19,7 @@ var bbQuotes: List<BBQuotes> = listOf()
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private lateinit var bbadapter: BBAdapter
+    private val viewModel:HomeViewModel by activityViewModels()
 
 
     override fun start() {

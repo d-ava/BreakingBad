@@ -2,10 +2,12 @@ package com.example.breakingbad.model
 
 
 import android.os.Parcelable
+import androidx.room.Entity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
+//@Entity
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class BBCharacter(
