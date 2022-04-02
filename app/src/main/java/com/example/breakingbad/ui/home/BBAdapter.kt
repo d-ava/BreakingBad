@@ -58,9 +58,7 @@ class BBAdapter(
                 onItemClicked(item)
             }
 
-//Glide.with(itemView).load(item.img).error(R.drawable.ic_close).into(binding.ivCharacter)
-//            binding.ivCharacter.glideExtension(item.img)
-//            Glide.with(itemView).load(item.img).into(binding.ivCharacter)
+
 
         }
 

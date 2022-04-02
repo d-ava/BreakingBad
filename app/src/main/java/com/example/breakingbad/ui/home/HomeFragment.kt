@@ -2,7 +2,9 @@ package com.example.breakingbad.ui.home
 
 import android.util.Log
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.breakingbad.R
@@ -12,6 +14,8 @@ import com.example.breakingbad.model.BBQuotes
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.ui.character.CharacterDetailsFragmentDirections
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 var bbQuotes: List<BBQuotes> = listOf()
@@ -25,9 +29,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     override fun start() {
 
         setRecycler()
-        getBBCharacters()
-        getQuotes()
+//        getBBCharacters()
+        getBBCharactersFromRoom()
+//        getQuotes()
 
+    }
+
+    private fun getBBCharactersFromRoom(){
+       lifecycleScope.launchWhenStarted {
+           viewModel.loadCharacters.collect {
+               Log.d("---", "from room maybe? $it")
+               bbadapter.setData(it)
+           }
+       }
     }
 
     private fun getQuotes() {
