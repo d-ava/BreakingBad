@@ -41,6 +41,7 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
 
     private fun setRecycler() {
         episodesAdapter = EpisodesAdapter {
+
             findNavController().navigate(SeasonFragmentDirections.toEpisodeDetailsFragment())
         }
         binding.recycler.adapter = episodesAdapter

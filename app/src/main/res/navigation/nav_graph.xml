@@ -33,21 +33,27 @@
         tools:layout="@layout/fragment_season">
         <argument
             android:name="series"
-            app:argType="string"/>
+            app:argType="string" />
     </fragment>
 
     <action
         android:id="@+id/toSeasonFragment"
-        app:destination="@+id/seasonFragment"/>
+        app:destination="@+id/seasonFragment" />
     <fragment
         android:id="@+id/episodeDetailsFragment"
         android:name="com.example.breakingbad.ui.episode.EpisodeDetailsFragment"
         android:label="fragment_episode_details"
-        tools:layout="@layout/fragment_episode_details" />
+        tools:layout="@layout/fragment_episode_details">
+
+
+        <!--<argument
+            android:name="episode"
+            app:argType="com.example.breakingbad.model.BBEpisodes" />-->
+    </fragment>
 
     <action
         android:id="@+id/toEpisodeDetailsFragment"
-        app:destination="@id/episodeDetailsFragment"/>
+        app:destination="@id/episodeDetailsFragment" />
 
 
 </navigation>

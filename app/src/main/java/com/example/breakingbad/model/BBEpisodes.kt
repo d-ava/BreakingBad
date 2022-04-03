@@ -1,11 +1,14 @@
 package com.example.breakingbad.model
 
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "episodes_table")
 @JsonClass(generateAdapter = true)
 data class BBEpisodes(
@@ -24,4 +27,4 @@ data class BBEpisodes(
     val episode: String,
     @Json(name = "series")
     val series: String
-)
+):Parcelable
