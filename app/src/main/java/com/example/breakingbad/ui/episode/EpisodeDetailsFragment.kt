@@ -1,6 +1,7 @@
 package com.example.breakingbad.ui.episode
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.breakingbad.databinding.FragmentEpisodeDetailsBinding
 import com.example.breakingbad.ui.BaseFragment
 
@@ -12,7 +13,14 @@ class EpisodeDetailsFragment : BaseFragment<FragmentEpisodeDetailsBinding>(Fragm
 
     override fun start() {
 
+        setListeners()
 
 
+    }
+
+    private fun setListeners(){
+        binding.backArrow.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 }
