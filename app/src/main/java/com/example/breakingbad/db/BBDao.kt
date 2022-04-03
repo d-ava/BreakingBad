@@ -1,9 +1,6 @@
 package com.example.breakingbad.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.breakingbad.model.BBCharacter
 import kotlinx.coroutines.flow.Flow
 
@@ -15,6 +12,8 @@ interface BBDao {
 
     @Query("SELECT * FROM bb_table")
     fun getAllCharacters(): Flow<List<BBCharacter>>
+
+
 
 
 }

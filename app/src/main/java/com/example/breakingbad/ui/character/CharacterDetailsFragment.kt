@@ -99,15 +99,15 @@ class CharacterDetailsFragment :
 
         viewModel.getQuotesFromAuthor(character.name)
         lifecycleScope.launchWhenStarted {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 viewModel.getQuotes.collect {
 
-                    Log.d("---", "get quotes from Room = $it")
-                    for (i in it){
-                        quotes=quotes + i.quote + "\n\n"
+//                    Log.d("---", "get quotes from Room = $it")
+                    for (i in it) {
+                        quotes = quotes + i.quote + "\n\n"
                     }
 
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
 //                        binding.tvQuotes.text = it.joinToString(separator = "\n\n")
                         binding.tvQuotes.text = quotes
 
@@ -119,11 +119,10 @@ class CharacterDetailsFragment :
     }
 
 
-
     private fun setRecycler() {
-        seriesAdapter = SeriesAdapter{
+        seriesAdapter = SeriesAdapter {
 //            view?.makeSnackbar(it)
-            val action=CharacterDetailsFragmentDirections.toSeasonFragment(it)
+            val action = CharacterDetailsFragmentDirections.toSeasonFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
         }
         binding.recyclerViewSeries.adapter = seriesAdapter

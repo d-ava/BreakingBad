@@ -59,19 +59,7 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
                         episodesAdapter.setData(body.filter { series[1] in it.series && series[0] in it.season })
                     }
 
-//                    Log.d("---", "filtered - $list4")
-//                    for (i in body) {
-//                        if (series[1] in i.series){
-//                            list2.add(i)
-//                        }
-//                    }
-//                    for (i in list2){
-//                        if (series[0] in i.season){
-//                            list3.add(i)
-//                        }
-//                    }
-//
-//                    Log.d("---", "list 3 = $list3")
+
 
                 }
             }

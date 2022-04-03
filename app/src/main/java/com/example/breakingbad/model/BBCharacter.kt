@@ -10,6 +10,7 @@ import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
+
 @Entity (tableName = "bb_table")
 @Parcelize
 @JsonClass(generateAdapter = true)

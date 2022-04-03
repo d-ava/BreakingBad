@@ -1,11 +1,15 @@
 package com.example.breakingbad.model
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Entity(tableName = "episodes_table")
 @JsonClass(generateAdapter = true)
 data class BBEpisodes(
+    @PrimaryKey(autoGenerate = false)
     @Json(name = "episode_id")
     val episodeId: Int,
     @Json(name = "title")
