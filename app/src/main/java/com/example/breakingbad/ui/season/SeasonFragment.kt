@@ -34,13 +34,15 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
         setTitle()
     }
 
-    private fun setTitle(){
+    private fun setTitle() {
         val series = args.series
         binding.tvSeason.text = "SEASON ${series[0]}"  //need to solve this. but not now
     }
 
-    private fun setRecycler(){
-        episodesAdapter = EpisodesAdapter()
+    private fun setRecycler() {
+        episodesAdapter = EpisodesAdapter {
+            findNavController().navigate(SeasonFragmentDirections.toEpisodeDetailsFragment())
+        }
         binding.recycler.adapter = episodesAdapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
@@ -55,10 +57,9 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
                 val response = NetworkClient.bbEpisodesApi.getEpisodes()
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
-                    withContext(Dispatchers.Main){
+                    withContext(Dispatchers.Main) {
                         episodesAdapter.setData(body.filter { series[1] in it.series && series[0] in it.season })
                     }
-
 
 
                 }

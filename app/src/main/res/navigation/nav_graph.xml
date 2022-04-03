@@ -39,6 +39,15 @@
     <action
         android:id="@+id/toSeasonFragment"
         app:destination="@+id/seasonFragment"/>
+    <fragment
+        android:id="@+id/episodeDetailsFragment"
+        android:name="com.example.breakingbad.ui.episode.EpisodeDetailsFragment"
+        android:label="fragment_episode_details"
+        tools:layout="@layout/fragment_episode_details" />
+
+    <action
+        android:id="@+id/toEpisodeDetailsFragment"
+        app:destination="@id/episodeDetailsFragment"/>
 
 
 </navigation>

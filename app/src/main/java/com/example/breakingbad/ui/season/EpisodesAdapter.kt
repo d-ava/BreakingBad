@@ -8,7 +8,7 @@ import com.example.breakingbad.R
 import com.example.breakingbad.databinding.BbEpisodesItemBinding
 import com.example.breakingbad.model.BBEpisodes
 
-class EpisodesAdapter : RecyclerView.Adapter<EpisodesAdapter.EpisodesViewHolder>() {
+class EpisodesAdapter(private val onEpisodeClicked:((item:BBEpisodes)->Unit)) : RecyclerView.Adapter<EpisodesAdapter.EpisodesViewHolder>() {
 
     private var list:MutableList<BBEpisodes> = mutableListOf()
 
@@ -41,6 +41,9 @@ class EpisodesAdapter : RecyclerView.Adapter<EpisodesAdapter.EpisodesViewHolder>
 
             fun onBind(){
                 model = list[adapterPosition]
+                binding.root.setOnClickListener {
+                    onEpisodeClicked(model)
+                }
                 binding.tvEpisodeName.text = model.title
                 binding.tvEpisodeId.text = model.episodeId.toString()
                 if ("S" in model.series){
