@@ -8,6 +8,17 @@
 
     </style>
 
+    <style name="et" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/et_background</item>
+        <item name="android:textColor">@color/bb_white</item>
+        <item name="android:fontFamily">@font/gotham_book</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">textStart</item>
+
+
+    </style>
+
     <style name="titleText" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">37sp</item>
         <item name="fontFamily">@font/gotham_medium</item>
