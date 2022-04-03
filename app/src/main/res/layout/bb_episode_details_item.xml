@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@color/bb_control_color"
+    android:padding="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/margin16"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCharacter"
+            android:layout_width="168dp"
+            android:layout_height="match_parent"
+            android:background="@color/bb_grey_light" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCharacterName"
+        style="@style/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cardView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="name lastname" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCharacterNickname"
+        style="@style/descriptionTextBook"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cardView"
+        app:layout_constraintTop_toBottomOf="@id/tvCharacterName"
+        tools:text="Nickname" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBy"
+        style="@style/descriptionTextBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="by"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cardView"
+        app:layout_constraintTop_toBottomOf="@id/tvCharacterNickname" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvActorNickname"
+        style="@style/descriptionTextBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cardView"
+        app:layout_constraintTop_toBottomOf="@id/tvBy"
+        tools:text="Actor name lastname" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
