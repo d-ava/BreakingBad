@@ -1,11 +1,13 @@
 package com.example.breakingbad.ui.episode
 
 import android.util.Log
+import androidx.core.view.setPadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.breakingbad.R
 import com.example.breakingbad.databinding.FragmentEpisodeDetailsBinding
 import com.example.breakingbad.ui.BaseFragment
 import kotlinx.coroutines.Dispatchers
@@ -22,8 +24,9 @@ class EpisodeDetailsFragment : BaseFragment<FragmentEpisodeDetailsBinding>(Fragm
     override fun start() {
 
         Log.d("---", "args on episode details $args")
-        binding.tvEpisodeName.text = args.episodeDetails.title
-        binding
+
+
+        setEpisodeInformation()
 
         setListeners()
 
@@ -32,6 +35,15 @@ class EpisodeDetailsFragment : BaseFragment<FragmentEpisodeDetailsBinding>(Fragm
         getCharacters()
 
 
+    }
+
+    private fun setEpisodeInformation(){
+        binding.tvEpisodeName.text = args.episodeDetails.title
+        binding.tvSeasonNumber.text = "Season" + args.episodeDetails.season //todo
+
+        if ("S" in args.episodeDetails.series ){
+            binding.ivEpisodeLogo.setBackgroundResource(R.drawable.ic_better_cal_saul_logo)
+        }
     }
 
     private fun getCharacters(){

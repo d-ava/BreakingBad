@@ -22,8 +22,10 @@
         android:id="@+id/ivEpisodeLogo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="50dp"
-        android:src="@drawable/ic_breaking_bad_logo"
+
+        android:background="@drawable/ic_breaking_bad_logo"
+        android:scaleY="0.5"
+        android:scaleX="0.5"
         app:layout_constraintDimensionRatio="W, 90:140"
         app:layout_constraintTop_toTopOf="parent" />
 
