@@ -44,18 +44,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun getQuotes() {
-        lifecycleScope.launchWhenStarted {
-            withContext(Dispatchers.IO) {
-                val response = NetworkClient.bbQuotesApi.getQuotes()
-                val body = response.body()
-                if (response.isSuccessful && body != null) {
-                    Log.d("---", "$body")
-                    bbQuotes = body
-                }
-            }
-        }
-    }
+//    private fun getQuotes() {
+//        lifecycleScope.launchWhenStarted {
+//            withContext(Dispatchers.IO) {
+//                val response = NetworkClient.bbQuotesApi.getQuotes()
+//                val body = response.body()
+//                if (response.isSuccessful && body != null) {
+//                    Log.d("---", "$body")
+//                    bbQuotes = body
+//                }
+//            }
+//        }
+//    }
 
 //    private fun getQuotesFromRoom() {
 //        lifecycleScope.launchWhenStarted {

@@ -11,7 +11,7 @@ import com.example.breakingbad.model.BBCharacter
 import com.squareup.picasso.Picasso
 
 class EpisodeDetailsAdapter02(
-    /*private val onItemClicked: ((bbCharacter: BBCharacter) -> Unit)*/
+    private val onItemClicked: ((bbCharacter: BBCharacter) -> Unit)
 ) : RecyclerView.Adapter<EpisodeDetailsAdapter02.EpisodeDetailsViewHolder>() {
 
     private val list: MutableList<BBCharacter> = mutableListOf()
@@ -57,6 +57,9 @@ class EpisodeDetailsAdapter02(
 
         fun onBind() {
             item = list[adapterPosition]
+            binding.ivCharacter.setOnClickListener {
+                onItemClicked(item)
+            }
             binding.tvCharacterName.text = item.name
             binding.tvActorName.text = item.portrayed
             binding.tvCharacterNickname.text = item.nickname

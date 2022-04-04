@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.core.view.setPadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +15,7 @@ import com.example.breakingbad.db.BBDao
 import com.example.breakingbad.db.BBDatabase
 import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.ui.BaseFragment
+import com.example.breakingbad.ui.character.CharacterDetailsFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
@@ -26,7 +28,7 @@ class EpisodeDetailsFragment :
     private lateinit var episodesAdapter: EpisodeDetailsAdapter02
     private val args: EpisodeDetailsFragmentArgs by navArgs()
 
-    private val tempList: MutableList<String> = mutableListOf("1", "3", "something", "eee")
+
 
     override fun start() {
 
@@ -84,7 +86,10 @@ class EpisodeDetailsFragment :
 
 
     private fun setRecycler() {
-        episodesAdapter = EpisodeDetailsAdapter02()
+        episodesAdapter = EpisodeDetailsAdapter02{
+            val action = CharacterDetailsFragmentDirections.toCharacterDetailsFragment(it)
+            findNavController().navigate(action)
+        }
         binding.recycler.adapter = episodesAdapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
