@@ -20,7 +20,7 @@ class HomeViewModel : ViewModel() {
     private var dao: BBDao = BBDatabase.db.bbDao()
     private var quotesDao: QuotesDao = QuotesDatabase.dbQuotes.quotesDao()
 
-    var loadCharacters: Flow<List<BBCharacter>> = dao.getAllCharacters()
+    var loadCharacters: Flow<List<BBCharacter>> = dao.getAllCharacters() //<-------------
     var loadQuotes: Flow<List<BBQuotes>> = quotesDao.getAllQuotes()
 
     init {

@@ -8,6 +8,7 @@ import com.example.breakingbad.databinding.BbEpisodeDetailsItemBinding
 import com.example.breakingbad.databinding.BbEpisodesItemBinding
 import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.model.BBEpisodes
+import com.squareup.picasso.Picasso
 
 class EpisodeDetailsAdapter(/*private val onEpisodeClick:((episode:BBEpisodes)->Unit)*/) :
     RecyclerView.Adapter<EpisodeDetailsAdapter.EpisodeDetailsViewHolder>() {
@@ -15,7 +16,7 @@ class EpisodeDetailsAdapter(/*private val onEpisodeClick:((episode:BBEpisodes)->
     private val list: MutableList<BBCharacter> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(list: List<BBCharacter>){
+    fun setData(list: List<BBCharacter>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
@@ -49,7 +50,7 @@ class EpisodeDetailsAdapter(/*private val onEpisodeClick:((episode:BBEpisodes)->
             model = list[adapterPosition]
 
             binding.tvCharacterName.text = model.name
-
+            Picasso.get().load(model.img).into(binding.ivCharacter)
         }
 
 

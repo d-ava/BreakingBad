@@ -6,24 +6,31 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingbad.R
 import com.example.breakingbad.databinding.FragmentEpisodeDetailsBinding
+import com.example.breakingbad.db.BBDao
+import com.example.breakingbad.db.BBDatabase
+import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.ui.BaseFragment
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 
 
-class EpisodeDetailsFragment : BaseFragment<FragmentEpisodeDetailsBinding>(FragmentEpisodeDetailsBinding::inflate) {
+class EpisodeDetailsFragment :
+    BaseFragment<FragmentEpisodeDetailsBinding>(FragmentEpisodeDetailsBinding::inflate) {
 
-    private val viewModel:EpisodeDetailsViewModel by viewModels()
-    private lateinit var episodesAdapter: EpisodeDetailsAdapter
-    private val args:EpisodeDetailsFragmentArgs by navArgs()
+    private val viewModel: EpisodeDetailsViewModel by viewModels()
+    private lateinit var episodesAdapter: EpisodeDetailsAdapter02
+    private val args: EpisodeDetailsFragmentArgs by navArgs()
 
+    private val tempList: MutableList<String> = mutableListOf("1", "3", "something", "eee")
 
     override fun start() {
 
-        Log.d("---", "args on episode details $args")
+//        Log.d("---", "args on episode details $args")
 
 
         setEpisodeInformation()
@@ -32,37 +39,59 @@ class EpisodeDetailsFragment : BaseFragment<FragmentEpisodeDetailsBinding>(Fragm
 
         setRecycler()
 
-        getCharacters()
+
+
+        getCharacterByName()
+
+    }
+
+    private fun getCharacterByName() {
+        val episodeCharacters = args.episodeDetails.characters
+        val finalList = mutableListOf<BBCharacter>()
+        lifecycleScope.launchWhenStarted {
+            withContext(Dispatchers.IO) {
+                viewModel.loadCharacters.collect { allCharacters ->
+//                    Log.d("---", "all - $allCharacters")
+                    Log.d("---", "character - $episodeCharacters")
+
+                    for (char in episodeCharacters) {
+                        for (char2 in allCharacters) {
+                            if (char == char2.name) {
+                                finalList.add(char2)
+                            }
+                        }
+                    }
+
+                    withContext(Dispatchers.Main){
+                      episodesAdapter.setData(finalList)
+                    }
+                    Log.d("---", "final list - $finalList")
+                }
+            }
+        }
 
 
     }
 
-    private fun setEpisodeInformation(){
+    private fun setEpisodeInformation() {
         binding.tvEpisodeName.text = args.episodeDetails.title
         binding.tvSeasonNumber.text = "Season" + args.episodeDetails.season //todo
 
-        if ("S" in args.episodeDetails.series ){
+        if ("S" in args.episodeDetails.series) {
             binding.ivEpisodeLogo.setBackgroundResource(R.drawable.ic_better_cal_saul_logo)
         }
     }
 
-    private fun getCharacters(){
-        lifecycleScope.launchWhenStarted {
-            withContext(Dispatchers.IO){
 
-            }
-        }
-
-    }
-
-    private fun setRecycler(){
-        episodesAdapter = EpisodeDetailsAdapter()
+    private fun setRecycler() {
+        episodesAdapter = EpisodeDetailsAdapter02()
         binding.recycler.adapter = episodesAdapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
+
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.backArrow.setOnClickListener {
             findNavController().popBackStack()
         }

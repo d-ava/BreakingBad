@@ -41,6 +41,7 @@ class CharacterDetailsFragment :
         setCharacterInformation()
         setRecycler()
 
+
 //        getQuotes()
     }
 
