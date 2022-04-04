@@ -46,9 +46,9 @@
         tools:layout="@layout/fragment_episode_details">
 
 
-        <!--<argument
-            android:name="episode"
-            app:argType="com.example.breakingbad.model.BBEpisodes" />-->
+        <argument
+            android:name="episodeDetails"
+            app:argType="com.example.breakingbad.model.BBEpisodes" />
     </fragment>
 
     <action

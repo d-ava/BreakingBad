@@ -41,8 +41,9 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
 
     private fun setRecycler() {
         episodesAdapter = EpisodesAdapter {
+            val action = SeasonFragmentDirections.toEpisodeDetailsFragment(it)
 
-            findNavController().navigate(SeasonFragmentDirections.toEpisodeDetailsFragment())
+            findNavController().navigate(action)
         }
         binding.recycler.adapter = episodesAdapter
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())

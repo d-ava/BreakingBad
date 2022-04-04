@@ -1,8 +1,10 @@
 package com.example.breakingbad.ui.episode
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingbad.databinding.FragmentEpisodeDetailsBinding
 import com.example.breakingbad.ui.BaseFragment
@@ -14,9 +16,14 @@ class EpisodeDetailsFragment : BaseFragment<FragmentEpisodeDetailsBinding>(Fragm
 
     private val viewModel:EpisodeDetailsViewModel by viewModels()
     private lateinit var episodesAdapter: EpisodeDetailsAdapter
+    private val args:EpisodeDetailsFragmentArgs by navArgs()
 
 
     override fun start() {
+
+        Log.d("---", "args on episode details $args")
+        binding.tvEpisodeName.text = args.episodeDetails.title
+        binding
 
         setListeners()
 
