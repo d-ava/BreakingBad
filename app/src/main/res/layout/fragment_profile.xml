@@ -1,19 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bb_background"
     tools:context=".ui.profile.ProfileFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:text="Profile Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="141dp"
+        android:layout_height="141dp"
+        android:layout_marginTop="83dp"
+        android:padding="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_android_logo"
+        android:tint="@color/bb_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        app:strokeColor="@color/bb_active_color"
+        app:strokeWidth="3dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvName"
+        style="@style/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePicture"
+        android:text="Name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUsername"
+        style="@style/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        android:text="Username" />
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/bb_control_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/descriptionTextBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin16"
+        android:text="Language"
+        android:id="@+id/tvLanguage"
+        app:layout_constraintBottom_toTopOf="@id/viewLine"
+        app:layout_constraintStart_toStartOf="@id/viewLine" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/descriptionTextBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin16"
+        android:text="Login"
+        android:id="@+id/tvLoginLogout"
+        app:layout_constraintTop_toBottomOf="@id/viewLine"
+        app:layout_constraintStart_toStartOf="@id/viewLine" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,11 @@
 
     </style>
 
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="et" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/et_background</item>
         <item name="android:textColor">@color/bb_white</item>
