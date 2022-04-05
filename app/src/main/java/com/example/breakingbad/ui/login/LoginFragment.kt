@@ -12,8 +12,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun setListeners(){
-        binding.backArrow.setOnClickListener {
-            findNavController().popBackStack()
+
+
+        binding.apply {
+            backArrow.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            tvRegister.setOnClickListener {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+            }
         }
     }
 }
