@@ -16,4 +16,8 @@
     <string name="quotes">QUOTES</string>
     <string name="save">SAVE</string>
     <string name="season">SEASON</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">don\'t have an account?</string>
+    <string name="register">REGISTER</string>
+    <string name="password">Password</string>
 </resources>
