@@ -18,4 +18,121 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUserNameTxt"
+        style="@style/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/username"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="@id/etUsername"
+        app:layout_constraintBottom_toTopOf="@id/etUsername"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etUsername"
+        style="@style/et"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="@dimen/margin32"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="@dimen/margin32"
+        android:drawablePadding="10dp"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:paddingStart="@dimen/margin16"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNameTxt"
+        style="@style/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/name"
+        app:layout_constraintBottom_toTopOf="@id/etName"
+        app:layout_constraintStart_toStartOf="@id/etUsername"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etName"
+        style="@style/et"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="@dimen/margin32"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="@dimen/margin32"
+        android:drawablePadding="10dp"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:paddingStart="@dimen/margin16"
+        app:layout_constraintTop_toBottomOf="@id/etUsername" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPasswordTxt"
+        style="@style/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/password"
+        app:layout_constraintBottom_toTopOf="@id/etPassword"
+        app:layout_constraintStart_toStartOf="@id/etUsername"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etPassword"
+        style="@style/et"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="@dimen/margin32"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="@dimen/margin32"
+        android:drawablePadding="10dp"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:paddingStart="@dimen/margin16"
+        app:layout_constraintTop_toBottomOf="@id/etName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvRepeatPasswordTxt"
+        style="@style/descriptionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/repeat_password"
+        app:layout_constraintBottom_toTopOf="@id/etRepeatPassword"
+        app:layout_constraintStart_toStartOf="@id/etUsername"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etRepeatPassword"
+        style="@style/et"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="@dimen/margin32"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="@dimen/margin32"
+        android:drawablePadding="10dp"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:paddingStart="@dimen/margin16"
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        style="@style/bigButton"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="@dimen/margin32"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="@dimen/margin32"
+        android:text="@string/register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etRepeatPassword" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
