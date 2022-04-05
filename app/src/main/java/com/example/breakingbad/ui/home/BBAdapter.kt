@@ -12,12 +12,18 @@ class BBAdapter(
     private val onItemClicked: ((bbCharacter: BBCharacter) -> Unit)
 ) : RecyclerView.Adapter<BBAdapter.BBCharacterViewHolder>() {
 
-    private val list: MutableList<BBCharacter> = mutableListOf()
+    private var list: MutableList<BBCharacter> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(list: List<BBCharacter>){
         this.list.clear()
         this.list.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filteredList(flist: MutableList<BBCharacter>){
+        list=flist
         notifyDataSetChanged()
     }
 
