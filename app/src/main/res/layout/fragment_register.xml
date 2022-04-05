@@ -92,7 +92,7 @@
         android:layout_marginEnd="@dimen/margin32"
         android:drawablePadding="10dp"
         android:imeOptions="actionDone"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:paddingStart="@dimen/margin16"
         app:layout_constraintTop_toBottomOf="@id/etName" />
 
@@ -118,7 +118,7 @@
         android:layout_marginEnd="@dimen/margin32"
         android:drawablePadding="10dp"
         android:imeOptions="actionDone"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:paddingStart="@dimen/margin16"
         app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
