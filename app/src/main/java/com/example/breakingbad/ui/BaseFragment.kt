@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.example.breakingbad.util.Utils
 
 
 typealias inflate <T> = (LayoutInflater, ViewGroup?, Boolean) -> T
@@ -45,6 +46,15 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: inflate<VB>) 
         _binding=null
     }
 
+    fun hideLoading(){
+        loadingDialog?.let{if (it.isShowing)it.cancel()}
+    }
+
+    fun showLoading(){
+        hideLoading()
+        loadingDialog = Utils.showLoadingDialog(requireContext())
+
+    }
 
 
 

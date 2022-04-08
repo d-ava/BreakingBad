@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.breakingbad.R
 import com.example.breakingbad.api.NetworkClient
 import com.example.breakingbad.databinding.FragmentHomeBinding
+import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.model.BBQuotes
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.ui.character.CharacterDetailsFragmentDirections
@@ -45,21 +46,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun getCharacters(){
+    private fun getCharacters() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.loadCharacters.collect {
-                    when(it){
+                    when (it) {
                         is Resource.Loading -> {
-
-                            Log.d ("---", "getCharacters loading")
+                            showLoading()
+//                            Log.d ("---", "getCharacters loading")
                         }
                         is Resource.Success -> {
+                            hideLoading()
                             bbadapter.setData(it.data!!)
 //                            Log.d ("---", "getCharacters ${it.data}")
                         }
                         is Resource.Error -> {
-                            Log.d ("---", "getCharacters error")
+                            hideLoading()
+                            view?.makeSnackbar(it.message!!)
                         }
                     }
                 }

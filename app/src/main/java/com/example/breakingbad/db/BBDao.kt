@@ -3,6 +3,7 @@ package com.example.breakingbad.db
 import androidx.room.*
 import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.model.BBQuotes
+import com.example.breakingbad.util.Resource
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -12,7 +13,7 @@ interface BBDao {
     suspend fun insertCharacters(character: List<BBCharacter>)
 
     @Query("SELECT * FROM bb_table")
-    fun getAllCharacters(): Flow<List<BBCharacter>>
+    fun getAllCharacters(): List<BBCharacter>?
 
 
 

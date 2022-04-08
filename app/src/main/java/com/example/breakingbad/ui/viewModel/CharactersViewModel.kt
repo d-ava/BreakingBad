@@ -17,8 +17,10 @@ class CharactersViewModel @Inject constructor(private val repository: Characters
     ViewModel() {
 
 
-    val loadCharacters: SharedFlow<Resource<List<BBCharacter>>> =
+    val loadCharacters: SharedFlow<Resource<List<BBCharacter>>?> =
         repository.getCharacters().shareIn(viewModelScope, SharingStarted.WhileSubscribed())
+
+
 
 
 }
