@@ -14,28 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingbad.R
 import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
 import com.example.breakingbad.extensions.makeSnackbar
-import com.example.breakingbad.model.User
 import com.example.breakingbad.ui.BaseFragment
-import com.example.breakingbad.ui.home.bbQuotes
 import com.example.breakingbad.util.Resource
-import com.example.breakingbad.util.Utils.auth
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class CharacterDetailsFragment :
     BaseFragment<FragmentCharacterDetailsBinding>(FragmentCharacterDetailsBinding::inflate) {
-
 
 
     private val args: CharacterDetailsFragmentArgs by navArgs()
@@ -46,7 +34,6 @@ class CharacterDetailsFragment :
 //    val charList: MutableList<String> = mutableListOf()
 
     override fun start() {
-
 
 
         setListeners()
@@ -61,17 +48,25 @@ class CharacterDetailsFragment :
     }
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun getQuotes(){
+    private fun getQuotes() {
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.loadQuotes.collect {
-                    when(it){
+                    when (it) {
                         is Resource.Loading -> {
                             showLoading()
                         }
                         is Resource.Success -> {
                             hideLoading()
-                            bbQuotes=it.data!!
+                            var quotes = ""
+                            for (quote in it.data!!) {
+                                if (quote.author.lowercase() == args.bbCharacterInformation.name.lowercase()) {
+                                    quotes = quotes + quote.quote + "\n\n"
+                                }
+                            }
+                            binding.tvQuotes.text = quotes
+
+//                            bbQuotes=it.data!!
                             Log.d("---", "get quotes ${it.data}")
                         }
                         is Resource.Error -> {
@@ -86,11 +81,10 @@ class CharacterDetailsFragment :
     }
 
 
-
     private fun setCharacterInformation() {
         val character = args.bbCharacterInformation
 
-        var quotes = ""
+//        var quotes = ""
         var occupations = ""
         for (occupation in character.occupation) {
             occupations = occupations + occupation + "\n"
@@ -119,32 +113,13 @@ class CharacterDetailsFragment :
 //        Log.d("---", "$appearanceList")
 
 //        quotes
-        for (quote in bbQuotes) {
-            if (quote.author.lowercase() == character.name.lowercase()) {
-                quotes = quotes + quote.quote + "\n\n"
-            }
-        }
-        binding.tvQuotes.text = quotes
-
-//
-//        viewModel.getQuotesFromAuthor(character.name)
-//        lifecycleScope.launchWhenStarted {
-//            withContext(Dispatchers.IO) {
-//                viewModel.getQuotes.collect {
-//
-////                    Log.d("---", "get quotes from Room = $it")
-//                    for (i in it) {
-//                        quotes = quotes + i.quote + "\n\n"
-//                    }
-//
-//                    withContext(Dispatchers.Main) {
-////                        binding.tvQuotes.text = it.joinToString(separator = "\n\n")
-//                        binding.tvQuotes.text = quotes
-//
-//                    }
-//                }
+//        for (quote in bbQuotes) {
+//            if (quote.author.lowercase() == character.name.lowercase()) {
+//                quotes = quotes + quote.quote + "\n\n"
 //            }
 //        }
+//        binding.tvQuotes.text = quotes
+
 
     }
 

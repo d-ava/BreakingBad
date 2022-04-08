@@ -16,7 +16,7 @@ interface EpisodesDao {
     suspend fun insertEpisodes(episode: List<BBEpisodes>)
 
     @Query("SELECT * FROM episodes_table")
-    fun getAllEpisodes(): Flow<List<BBEpisodes>>
+    fun getAllEpisodes(): List<BBEpisodes>?
 
 //    @Query("SELECT * FROM quotes_table WHERE author = :author")
 //    fun getAllQuotesFromAuthor(author: String): Flow<List<BBQuotes>>

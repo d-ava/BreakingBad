@@ -25,39 +25,7 @@ class CharacterDetailsViewModel @Inject constructor(private val repository: Quot
             repository.getQuotes().shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 
 
-//    private val quotesDao: QuotesDao = QuotesDatabase.dbQuotes.quotesDao()
-//    private val episodesDao: EpisodesDao = EpisodesDatabase.dbEpisodes.episodesDao()
 
-//    private val _getQuotes: MutableSharedFlow<List<BBQuotes>> = MutableSharedFlow()
-//    val getQuotes: SharedFlow<List<BBQuotes>> = _getQuotes
-
-//    fun getQuotesFromAuthor(author: String) {
-//        viewModelScope.launch {
-//            withContext(Dispatchers.IO) {
-//                quotesDao.getAllQuotesFromAuthor(author).collect {
-//                    _getQuotes.emit(it)
-//                }
-//
-//            }
-//        }
-//    }
-
-//    init {
-//        getAllEpisodes()
-//    }
-
-
-//private     fun getAllEpisodes() {
-//        viewModelScope.launch {
-//            withContext(Dispatchers.IO) {
-//                val response = NetworkClient.bbEpisodesApi.getEpisodes()
-//                val body = response.body()
-//                if (response.isSuccessful && body !=null){
-//                    episodesDao.insertEpisodes(body)
-//                }
-//            }
-//        }
-//    }
 
 
 }
