@@ -21,6 +21,4 @@ class CharactersViewModel @Inject constructor(private val repository: Characters
         repository.getCharacters().shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 
 
-
-
 }

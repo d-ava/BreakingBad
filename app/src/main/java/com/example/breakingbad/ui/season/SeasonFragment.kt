@@ -1,18 +1,11 @@
 package com.example.breakingbad.ui.season
 
-import android.net.Network
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingbad.R
-import com.example.breakingbad.api.BBEpisodes
+import com.example.breakingbad.api.BBEpisodesApi
 import com.example.breakingbad.api.NetworkClient
 import com.example.breakingbad.databinding.FragmentSeasonBinding
 import com.example.breakingbad.ui.BaseFragment

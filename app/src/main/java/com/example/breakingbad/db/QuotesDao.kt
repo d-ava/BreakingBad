@@ -15,7 +15,7 @@ interface QuotesDao {
     suspend fun insertQuotes(quote: List<BBQuotes>)
 
     @Query("SELECT * FROM quotes_table")
-    fun getAllQuotes(): Flow<List<BBQuotes>>
+    fun getAllQuotes(): List<BBQuotes>?
 
     @Query("SELECT * FROM quotes_table WHERE author = :author")
     fun getAllQuotesFromAuthor(author: String): Flow<List<BBQuotes>>

@@ -2,6 +2,8 @@ package com.example.breakingbad.di
 
 import androidx.viewbinding.BuildConfig
 import com.example.breakingbad.api.BBCharactersApi
+import com.example.breakingbad.api.BBEpisodesApi
+import com.example.breakingbad.api.BBQuotesApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -68,5 +70,16 @@ object NetworkModule {
         return retrofit.build().create(BBCharactersApi::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun providesBBQuotesApi(retrofit: Retrofit.Builder):BBQuotesApi{
+        return retrofit.build().create(BBQuotesApi::class.java)
+    }
 
+
+    @Singleton
+    @Provides
+    fun providesBBEpisodesApi (retrofit: Retrofit.Builder):BBEpisodesApi{
+        return retrofit.build().create(BBEpisodesApi::class.java)
+    }
 }

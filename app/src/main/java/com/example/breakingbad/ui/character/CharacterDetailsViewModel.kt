@@ -8,14 +8,22 @@ import com.example.breakingbad.db.EpisodesDatabase
 import com.example.breakingbad.db.QuotesDao
 import com.example.breakingbad.db.QuotesDatabase
 import com.example.breakingbad.model.BBQuotes
+import com.example.breakingbad.repository.QuotesRepository
+import com.example.breakingbad.util.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class CharacterDetailsViewModel : ViewModel() {
+@HiltViewModel
+class CharacterDetailsViewModel @Inject constructor(private val repository: QuotesRepository) :
+    ViewModel() {
+
+        val loadQuotes: SharedFlow<Resource<List<BBQuotes>>?> =
+            repository.getQuotes().shareIn(viewModelScope, SharingStarted.WhileSubscribed())
+
 
 //    private val quotesDao: QuotesDao = QuotesDatabase.dbQuotes.quotesDao()
 //    private val episodesDao: EpisodesDao = EpisodesDatabase.dbEpisodes.episodesDao()

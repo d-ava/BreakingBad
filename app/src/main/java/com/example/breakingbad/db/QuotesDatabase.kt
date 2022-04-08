@@ -12,7 +12,7 @@ import com.example.breakingbad.model.BBQuotes
 //@TypeConverters (Converters::class)
 abstract class QuotesDatabase : RoomDatabase() {
 
-//    abstract fun quotesDao(): QuotesDao
+    abstract fun quotesDao(): QuotesDao
 //
 //    companion object {
 //        val dbQuotes by lazy {

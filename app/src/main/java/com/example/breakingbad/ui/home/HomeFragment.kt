@@ -64,6 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                             hideLoading()
                             view?.makeSnackbar(it.message!!)
                         }
+                        else -> {Unit}
                     }
                 }
             }
