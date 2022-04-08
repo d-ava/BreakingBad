@@ -19,11 +19,11 @@ import kotlinx.coroutines.withContext
 
 class EpisodeDetailsViewModel : ViewModel() {
 
-    private var dao: BBDao = BBDatabase.db.bbDao()
+//    private var dao: BBDao = BBDatabase.db.bbDao()
 
 
 
-    var loadCharacters: Flow<List<BBCharacter>> = dao.getAllCharacters() //<-------------
+//    var loadCharacters: Flow<List<BBCharacter>> = dao.getAllCharacters() //<-------------
 
 }
 

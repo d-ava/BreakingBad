@@ -23,15 +23,15 @@
         style="@style/descriptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/username"
+        android:text="@string/email"
         android:layout_marginBottom="8dp"
-        app:layout_constraintStart_toStartOf="@id/etUsername"
-        app:layout_constraintBottom_toTopOf="@id/etUsername"
+        app:layout_constraintStart_toStartOf="@id/etEmail"
+        app:layout_constraintBottom_toTopOf="@id/etEmail"
 
         />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etUsername"
+        android:id="@+id/etEmail"
         style="@style/et"
         android:layout_width="match_parent"
         android:layout_height="42dp"
@@ -52,7 +52,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/name"
         app:layout_constraintBottom_toTopOf="@id/etName"
-        app:layout_constraintStart_toStartOf="@id/etUsername"
+        app:layout_constraintStart_toStartOf="@id/etEmail"
 
         />
 
@@ -68,7 +68,7 @@
         android:imeOptions="actionDone"
         android:inputType="text"
         android:paddingStart="@dimen/margin16"
-        app:layout_constraintTop_toBottomOf="@id/etUsername" />
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPasswordTxt"
@@ -78,7 +78,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/password"
         app:layout_constraintBottom_toTopOf="@id/etPassword"
-        app:layout_constraintStart_toStartOf="@id/etUsername"
+        app:layout_constraintStart_toStartOf="@id/etEmail"
 
         />
 
@@ -104,7 +104,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/repeat_password"
         app:layout_constraintBottom_toTopOf="@id/etRepeatPassword"
-        app:layout_constraintStart_toStartOf="@id/etUsername"
+        app:layout_constraintStart_toStartOf="@id/etEmail"
 
         />
 

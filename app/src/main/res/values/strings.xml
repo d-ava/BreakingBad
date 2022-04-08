@@ -25,4 +25,5 @@
     <string name="name">Name</string>
 
     <string name="repeat_password">Repeat Password</string>
+    <string name="email">Email</string>
 </resources>

@@ -25,19 +25,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private var fullList = mutableListOf<BBCharacter>()
 
     override fun start() {
-        setRecycler()
-        getBBCharactersFromRoom()
-        search()
+//        setRecycler()
+//        getBBCharactersFromRoom()
+//        search()
     }
 
 
-    private fun getBBCharactersFromRoom() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.loadCharacters.collect {
-                fullList = it.toMutableList()
-            }
-        }
-    }
+//    private fun getBBCharactersFromRoom() {
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.loadCharacters.collect {
+//                fullList = it.toMutableList()
+//            }
+//        }
+//    }
 
     private fun setRecycler() {
         searchAdapter = BBAdapter {

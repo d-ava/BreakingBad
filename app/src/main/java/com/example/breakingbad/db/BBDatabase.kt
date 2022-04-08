@@ -12,17 +12,17 @@ import com.example.breakingbad.model.BBCharacter
 abstract class BBDatabase :RoomDatabase(){
 
     abstract fun bbDao(): BBDao
-
-    companion object{
-        val db by lazy {
-            Room.databaseBuilder(
-                App.appContext!!,
-                BBDatabase::class.java, "bb_table"
-
-            ).fallbackToDestructiveMigration()
-                .build()
-        }
-    }
+//
+//    companion object{
+//        val db by lazy {
+//            Room.databaseBuilder(
+//                App.appContext!!,
+//                BBDatabase::class.java, "bb_table"
+//
+//            ).fallbackToDestructiveMigration()
+//                .build()
+//        }
+//    }
 
 
 }

@@ -12,18 +12,18 @@ import com.example.breakingbad.model.BBQuotes
 //@TypeConverters (Converters::class)
 abstract class QuotesDatabase : RoomDatabase() {
 
-    abstract fun quotesDao(): QuotesDao
-
-    companion object {
-        val dbQuotes by lazy {
-            Room.databaseBuilder(
-                App.appContext!!,
-                QuotesDatabase::class.java, "quotes_table"
-
-            ).fallbackToDestructiveMigration()
-                .build()
-        }
-    }
+//    abstract fun quotesDao(): QuotesDao
+//
+//    companion object {
+//        val dbQuotes by lazy {
+//            Room.databaseBuilder(
+//                App.appContext!!,
+//                QuotesDatabase::class.java, "quotes_table"
+//
+//            ).fallbackToDestructiveMigration()
+//                .build()
+//        }
+//    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.breakingbad.ui.home
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -13,6 +14,9 @@ import com.example.breakingbad.databinding.FragmentHomeBinding
 import com.example.breakingbad.model.BBQuotes
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.ui.character.CharacterDetailsFragmentDirections
+import com.example.breakingbad.ui.viewModel.CharactersViewModel
+import com.example.breakingbad.util.Resource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -20,29 +24,56 @@ import kotlinx.coroutines.withContext
 
 var bbQuotes: List<BBQuotes> = listOf()
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private lateinit var bbadapter: BBAdapter
-    private val viewModel: HomeViewModel by activityViewModels()
 
+    //    private val viewModel: HomeViewModel by activityViewModels()
+    private val sharedViewModel: CharactersViewModel by activityViewModels()
 
     override fun start() {
 
         setRecycler()
 //        getBBCharacters()
-        getBBCharactersFromRoom()
+//        getBBCharactersFromRoom()
 //        getQuotes()
 //        getQuotesFromRoom()
 
+        getCharacters()
+
     }
 
-    private fun getBBCharactersFromRoom() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.loadCharacters.collect {
-                bbadapter.setData(it)
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    private fun getCharacters(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                sharedViewModel.loadCharacters.collect {
+                    when(it){
+                        is Resource.Loading -> {
+
+                            Log.d ("---", "getCharacters loading")
+                        }
+                        is Resource.Success -> {
+                            bbadapter.setData(it.data!!)
+//                            Log.d ("---", "getCharacters ${it.data}")
+                        }
+                        is Resource.Error -> {
+                            Log.d ("---", "getCharacters error")
+                        }
+                    }
+                }
             }
         }
     }
+
+//    private fun getBBCharactersFromRoom() {
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.loadCharacters.collect {
+//                bbadapter.setData(it)
+//            }
+//        }
+//    }
 
 //    private fun getQuotes() {
 //        lifecycleScope.launchWhenStarted {
@@ -80,22 +111,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun getBBCharacters() {
-        lifecycleScope.launchWhenStarted {
-            withContext(Dispatchers.IO) {
-                val response = NetworkClient.bbCharactersApi.getBBCharacters()
-                val body = response.body()
-                if (response.isSuccessful && body != null) {
-                    Log.d("---", "$body")
-                    withContext(Dispatchers.Main) {
-                        bbadapter.setData(body)
-                    }
-                } else {
-                    Log.d("---", "${response.code()}")
-                }
-            }
-        }
-    }
+//    private fun getBBCharacters() {
+//        lifecycleScope.launchWhenStarted {
+//            withContext(Dispatchers.IO) {
+//                val response = NetworkClient.bbCharactersApi.getBBCharacters()
+//                val body = response.body()
+//                if (response.isSuccessful && body != null) {
+//                    Log.d("---", "$body")
+//                    withContext(Dispatchers.Main) {
+//                        bbadapter.setData(body)
+//                    }
+//                } else {
+//                    Log.d("---", "${response.code()}")
+//                }
+//            }
+//        }
+//    }
 
 
 }

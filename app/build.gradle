@@ -5,12 +5,14 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'com.android.application'
+apply plugin: 'dagger.hilt.android.plugin'
 
 
 android {
@@ -115,6 +117,19 @@ dependencies {
 
     implementation 'com.google.dagger:hilt-android:2.40.1'
     kapt 'com.google.dagger:hilt-compiler:2.40.5'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
+
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+
+
+    // Declare the dependency for the Realtime Database library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-database-ktx'
 }
 
 kapt{

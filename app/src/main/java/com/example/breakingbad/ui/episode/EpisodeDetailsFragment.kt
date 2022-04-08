@@ -35,45 +35,45 @@ class EpisodeDetailsFragment :
 //        Log.d("---", "args on episode details $args")
 
 
-        setEpisodeInformation()
+//        setEpisodeInformation()
+//
+//        setListeners()
+//
+//        setRecycler()
 
-        setListeners()
-
-        setRecycler()
 
 
-
-        getCharacterByName()
-
-    }
-
-    private fun getCharacterByName() {
-        val episodeCharacters = args.episodeDetails.characters
-        val finalList = mutableListOf<BBCharacter>()
-        lifecycleScope.launchWhenStarted {
-            withContext(Dispatchers.IO) {
-                viewModel.loadCharacters.collect { allCharacters ->
-//                    Log.d("---", "all - $allCharacters")
-                    Log.d("---", "character - $episodeCharacters")
-
-                    for (char in episodeCharacters) {
-                        for (char2 in allCharacters) {
-                            if (char == char2.name) {
-                                finalList.add(char2)
-                            }
-                        }
-                    }
-
-                    withContext(Dispatchers.Main){
-                      episodesAdapter.setData(finalList)
-                    }
-                    Log.d("---", "final list - $finalList")
-                }
-            }
-        }
-
+//        getCharacterByName()
 
     }
+
+//    private fun getCharacterByName() {
+//        val episodeCharacters = args.episodeDetails.characters
+//        val finalList = mutableListOf<BBCharacter>()
+//        lifecycleScope.launchWhenStarted {
+//            withContext(Dispatchers.IO) {
+//                viewModel.loadCharacters.collect { allCharacters ->
+////                    Log.d("---", "all - $allCharacters")
+//                    Log.d("---", "character - $episodeCharacters")
+//
+//                    for (char in episodeCharacters) {
+//                        for (char2 in allCharacters) {
+//                            if (char == char2.name) {
+//                                finalList.add(char2)
+//                            }
+//                        }
+//                    }
+//
+//                    withContext(Dispatchers.Main){
+//                      episodesAdapter.setData(finalList)
+//                    }
+//                    Log.d("---", "final list - $finalList")
+//                }
+//            }
+//        }
+//
+//
+//    }
 
     private fun setEpisodeInformation() {
         binding.tvEpisodeName.text = args.episodeDetails.title

@@ -17,46 +17,46 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel : ViewModel() {
 
-    private var dao: BBDao = BBDatabase.db.bbDao()
-    private var quotesDao: QuotesDao = QuotesDatabase.dbQuotes.quotesDao()
+//    private var dao: BBDao = BBDatabase.db.bbDao()
+//    private var quotesDao: QuotesDao = QuotesDatabase.dbQuotes.quotesDao()
 
-    var loadCharacters: Flow<List<BBCharacter>> = dao.getAllCharacters() //<-------------
-    var loadQuotes: Flow<List<BBQuotes>> = quotesDao.getAllQuotes()
+//    var loadCharacters: Flow<List<BBCharacter>> = dao.getAllCharacters() //<-------------
+//    var loadQuotes: Flow<List<BBQuotes>> = quotesDao.getAllQuotes()
 
     init {
 
-        getCharacters()
-        getQuotes()
+//        getCharacters()
+//        getQuotes()
 
     }
 
-    private fun getQuotes(){
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                val response = NetworkClient.bbQuotesApi.getQuotes()
-                val body = response.body()
-                if (response.isSuccessful && body != null){
-                    quotesDao.insertQuotes(body)
-                }
-            }
-        }
-    }
+//    private fun getQuotes(){
+//        viewModelScope.launch {
+//            withContext(Dispatchers.IO){
+//                val response = NetworkClient.bbQuotesApi.getQuotes()
+//                val body = response.body()
+//                if (response.isSuccessful && body != null){
+//                    quotesDao.insertQuotes(body)
+//                }
+//            }
+//        }
+//    }
 
-    private fun getCharacters() {
-
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                val response = NetworkClient.bbCharactersApi.getBBCharacters()
-                val body = response.body()
-                if (response.isSuccessful && body != null) {
-
-                    dao.insertCharacters(body)
-                }
-            }
-
-        }
-
-    }
+//    private fun getCharacters() {
+//
+//        viewModelScope.launch {
+//            withContext(Dispatchers.IO) {
+//                val response = NetworkClient.bbCharactersApi.getBBCharacters()
+//                val body = response.body()
+//                if (response.isSuccessful && body != null) {
+//
+//                    dao.insertCharacters(body)
+//                }
+//            }
+//
+//        }
+//
+//    }
 
 
 }
