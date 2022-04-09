@@ -11,8 +11,9 @@ import com.google.firebase.database.FirebaseDatabase
 object Utils {
 
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
-//    var database = FirebaseDatabase.getInstance()
-//    var databaseReference = database.reference.child("user")
+    var database = FirebaseDatabase.getInstance()
+
+    var databaseReference = database.reference.child("user")
 
 
     fun showLoadingDialog(context: Context): Dialog {

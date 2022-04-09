@@ -1,23 +1,29 @@
 package com.example.breakingbad.ui.register
 
+import android.annotation.SuppressLint
 import android.util.Log
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.breakingbad.databinding.FragmentRegisterBinding
+import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.model.User
 import com.example.breakingbad.ui.BaseFragment
+import com.example.breakingbad.util.Resource
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
-
-    private var auth = Firebase.auth
-
-
-    var database = FirebaseDatabase.getInstance()
-    var databaseReference = database.reference.child("user")
-
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun start() {
         setListeners()
@@ -25,34 +31,43 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
 
     }
 
+
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun registerUser() {
+        val name = binding.etName.text.toString()
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+        val repeatPassword = binding.etRepeatPassword.text.toString()
 
-        var charList: MutableList<String> = mutableListOf()
+        viewModel.registerUser(
+            name, email, password, repeatPassword
+        )
 
-        auth.createUserWithEmailAndPassword(
-            binding.etEmail.text.toString(),
-            binding.etPassword.text.toString()
-        ).addOnCompleteListener(requireActivity()) {
-            if (it.isSuccessful) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.userRegister.collect {
+                    when (it) {
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
+                        is Resource.Success -> {
+                            hideLoading()
+                            view?.makeSnackbar("yay")
+                        }
+                        is Resource.Error -> {
+                            hideLoading()
 
-                Log.d("---", "registration successful")
-                val newUser = User(
-                    name = binding.etName.text.toString(),
-                    email = binding.etEmail.text.toString(),
-                    characterId = mutableListOf("0")
-                )
-                databaseReference.child(auth.uid!!).setValue(newUser)
+                            view?.makeSnackbar("${it.message}")
+                        }
 
 
-            } else {
-                Log.d("---", "problem during registration")
+                    }
+                }
             }
-
-
         }
 
-
     }
+
 
     private fun setListeners() {
         binding.apply {
