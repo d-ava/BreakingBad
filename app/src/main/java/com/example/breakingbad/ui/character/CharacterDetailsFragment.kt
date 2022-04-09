@@ -37,7 +37,6 @@ class CharacterDetailsFragment :
     override fun start() {
 
 
-        setListeners()
 //        onBackPressed()
         setCharacterInformation()
         setRecycler()
@@ -45,36 +44,62 @@ class CharacterDetailsFragment :
 
         getQuotes()
 //        getQuotesLiveData()
+        setListeners()
 
     }
 
-    private fun getQuotesLiveData(){
-        viewModel.fetchQuotes.observe(this, Observer {
-            when (it) {
-                is Resource.Loading -> {
-                    showLoading()
-                }
-                is Resource.Success -> {
-                    hideLoading()
-                    var quotes = ""
-                    for (quote in it.data!!) {
-                        if (quote.author.lowercase() == args.bbCharacterInformation.name.lowercase()) {
-                            quotes = quotes + quote.quote + "\n\n"
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    private fun saveCharacter(){
+        val characterId=args.bbCharacterInformation.charId
+        viewModel.saveCharacterId(characterId)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.saveCharacter.collect {
+                    when(it){
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
+                        is Resource.Success -> {
+                            hideLoading()
+                            view?.makeSnackbar("character saved")
+                        }
+                        is Resource.Error -> {
+                            hideLoading()
+                            view?.makeSnackbar("${it.message}")
                         }
                     }
-                    binding.tvQuotes.text = quotes
-
-//                            bbQuotes=it.data!!
-                    Log.d("---", "get quotes ${it.data}")
                 }
-                is Resource.Error -> {
-                    hideLoading()
-                    view?.makeSnackbar(it.message!!)
-                }
-                else -> Unit
             }
-        })
+        }
     }
+
+//    private fun getQuotesLiveData() {
+//        viewModel.fetchQuotes.observe(this, Observer {
+//            when (it) {
+//                is Resource.Loading -> {
+//                    showLoading()
+//                }
+//                is Resource.Success -> {
+//                    hideLoading()
+//                    var quotes = ""
+//                    for (quote in it.data!!) {
+//                        if (quote.author.lowercase() == args.bbCharacterInformation.name.lowercase()) {
+//                            quotes = quotes + quote.quote + "\n\n"
+//                        }
+//                    }
+//                    binding.tvQuotes.text = quotes
+//
+////                            bbQuotes=it.data!!
+//                    Log.d("---", "get quotes ${it.data}")
+//                }
+//                is Resource.Error -> {
+//                    hideLoading()
+//                    view?.makeSnackbar(it.message!!)
+//                }
+//                else -> Unit
+//            }
+//        })
+//    }
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun getQuotes() {
@@ -140,7 +165,6 @@ class CharacterDetailsFragment :
         }
 
 
-
     }
 
 
@@ -164,6 +188,7 @@ class CharacterDetailsFragment :
         }
 
         binding.btnAddRemove.setOnClickListener {
+            saveCharacter()
 
 
         }

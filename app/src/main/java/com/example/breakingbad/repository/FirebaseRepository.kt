@@ -12,9 +12,24 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
+import java.io.IOException
 import javax.inject.Inject
 
 class FirebaseRepository @Inject constructor() {
+
+    fun saveCharacter(id:Int):Flow<Resource<Boolean>>{
+        val user = auth.currentUser
+        val userReference=databaseReference.child(user?.uid!!)
+
+        return flow{
+            try {
+                userReference.child("characterId").setValue(mutableListOf(id, 9, 7)).await()
+            emit(Resource.Success())
+            }catch (e:IOException){
+                emit(Resource.Error(e.message?:"unknown error"))
+            }
+        }
+    }
 
 
     suspend fun logInUser(
