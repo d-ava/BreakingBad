@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "718119250046",
-    "project_id": "breakingbad-ce06c",
-    "storage_bucket": "breakingbad-ce06c.appspot.com"
+    "project_number": "594621763826",
+    "firebase_url": "https://breakingbad-a29b4-default-rtdb.firebaseio.com",
+    "project_id": "breakingbad-a29b4",
+    "storage_bucket": "breakingbad-a29b4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:718119250046:android:5e8f7e7e54129e65e3d02f",
+        "mobilesdk_app_id": "1:594621763826:android:18b5714235ea02b793006b",
         "android_client_info": {
           "package_name": "com.example.breakingbad"
         }
       },
       "oauth_client": [
         {
-          "client_id": "718119250046-g7hnqk96l40qga6lnba3hsgbgk54idks.apps.googleusercontent.com",
+          "client_id": "594621763826-lbi3gaihqbtntbo5d0vq6ivvje7ajqop.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBPVFjRIORtpovOfxbnKh4mCiU0pBIwbeY"
+          "current_key": "AIzaSyAHPsFI-t4w8SeekOdzGQCOVzq0No1rHD4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "718119250046-g7hnqk96l40qga6lnba3hsgbgk54idks.apps.googleusercontent.com",
+              "client_id": "594621763826-lbi3gaihqbtntbo5d0vq6ivvje7ajqop.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
