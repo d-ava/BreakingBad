@@ -7,7 +7,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.breakingbad.R
 import com.example.breakingbad.databinding.FragmentLoginBinding
 import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.ui.BaseFragment
@@ -46,7 +48,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                         }
                         is Resource.Success -> {
                             hideLoading()
-                            view?.makeSnackbar("login successfull uid= ${auth.uid}")
+//                            view?.makeSnackbar("login successfull uid= ${auth.uid}")
+                            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToNavHomeFragment())
                         }
                         is Resource.Error -> {
                             hideLoading()

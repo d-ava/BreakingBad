@@ -9,6 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.breakingbad.databinding.FragmentRegisterBinding
 import com.example.breakingbad.extensions.makeSnackbar
+import com.example.breakingbad.extensions.safeNavigate
 import com.example.breakingbad.model.User
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.util.Resource
@@ -52,7 +53,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                         }
                         is Resource.Success -> {
                             hideLoading()
-                            view?.makeSnackbar("yay")
+                            findNavController().safeNavigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
+//                            view?.makeSnackbar("yay")
                         }
                         is Resource.Error -> {
                             hideLoading()
