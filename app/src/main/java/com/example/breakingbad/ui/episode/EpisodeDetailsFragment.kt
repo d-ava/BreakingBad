@@ -64,7 +64,7 @@ class EpisodeDetailsFragment :
                             showLoading()
                         }
                         is Resource.Success -> {
-//                            Log.d("---", "success -> ${it.data}")
+
                             hideLoading()
                             for (char in args.episodeDetails.characters) {
                                 for (char2 in it.data!!) {

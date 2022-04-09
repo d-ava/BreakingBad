@@ -1,29 +1,19 @@
 package com.example.breakingbad.ui.register
 
 import android.util.Log
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.breakingbad.databinding.FragmentRegisterBinding
 import com.example.breakingbad.model.User
 import com.example.breakingbad.ui.BaseFragment
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
-//    var auth: FirebaseAuth = FirebaseAuth.getInstance()
-
-//    private lateinit var auth: FirebaseAuth
 
     private var auth = Firebase.auth
-//    val database = FirebaseDatabase.getInstance()
-//    var databaseReference = database.reference.child("user")
 
-//    val database = Firebase.database
-//    val charRef = database.getReference("user")
 
     var database = FirebaseDatabase.getInstance()
     var databaseReference = database.reference.child("user")

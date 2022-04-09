@@ -1,6 +1,10 @@
 package com.example.breakingbad.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -35,11 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun start() {
 
+        checkAndLoadCharacters()
         setRecycler()
-//        getBBCharacters()
-//        getBBCharactersFromRoom()
-//        getQuotes()
-//        getQuotesFromRoom()
 
         getCharacters()
 
@@ -71,36 +72,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-//    private fun getBBCharactersFromRoom() {
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.loadCharacters.collect {
-//                bbadapter.setData(it)
-//            }
-//        }
-//    }
 
-//    private fun getQuotes() {
-//        lifecycleScope.launchWhenStarted {
-//            withContext(Dispatchers.IO) {
-//                val response = NetworkClient.bbQuotesApi.getQuotes()
-//                val body = response.body()
-//                if (response.isSuccessful && body != null) {
-//                    Log.d("---", "$body")
-//                    bbQuotes = body
-//                }
-//            }
-//        }
-//    }
-
-//    private fun getQuotesFromRoom() {
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.loadQuotes.collect {
-//                bbQuotes=it
-//
-//            }
-//        }
-//
-//    }
 
     private fun setRecycler() {
         bbadapter = BBAdapter {
@@ -115,22 +87,55 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-//    private fun getBBCharacters() {
-//        lifecycleScope.launchWhenStarted {
-//            withContext(Dispatchers.IO) {
-//                val response = NetworkClient.bbCharactersApi.getBBCharacters()
-//                val body = response.body()
-//                if (response.isSuccessful && body != null) {
-//                    Log.d("---", "$body")
-//                    withContext(Dispatchers.Main) {
-//                        bbadapter.setData(body)
-//                    }
-//                } else {
-//                    Log.d("---", "${response.code()}")
-//                }
-//            }
-//        }
-//    }
+    private fun checkAndLoadCharacters(){
+        if (checkForInternet(requireContext())){
+            view?.makeSnackbar("we have internet")
+        }else{
+            view?.makeSnackbar("unfortunately no internet")
+        }
+    }
+
+    private fun checkForInternet(context: Context): Boolean {
+
+        // register activity with the connectivity manager service
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // if the android version is equal to M
+        // or greater we need to use the
+        // NetworkCapabilities to check what type of
+        // network has the internet connection
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            // Returns a Network object corresponding to
+            // the currently active default data network.
+            val network = connectivityManager.activeNetwork ?: return false
+
+            // Representation of the capabilities of an active network.
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                // Indicates this network uses a Wi-Fi transport,
+                // or WiFi has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                // Indicates this network uses a Cellular transport. or
+                // Cellular has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                // else return false
+                else -> false
+            }
+        } else {
+            // if the android version is below M
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
+    }
+
+
 
 
 }
