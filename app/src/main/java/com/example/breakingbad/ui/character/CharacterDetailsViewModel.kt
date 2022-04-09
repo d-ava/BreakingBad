@@ -9,6 +9,7 @@ import com.example.breakingbad.db.EpisodesDatabase
 import com.example.breakingbad.db.QuotesDao
 import com.example.breakingbad.db.QuotesDatabase
 import com.example.breakingbad.model.BBQuotes
+import com.example.breakingbad.model.User
 import com.example.breakingbad.repository.FirebaseRepository
 import com.example.breakingbad.repository.QuotesRepository
 import com.example.breakingbad.util.Resource
@@ -58,5 +59,16 @@ class CharacterDetailsViewModel @Inject constructor(
         }
     }
 
+
+    //load saved characters
+
+    private val _loadSavedCharactersList: MutableSharedFlow<User> = MutableSharedFlow()
+    val loadSavedCharactersList:SharedFlow<User> = _loadSavedCharactersList
+
+    fun loadSavedCharacters(){
+        viewModelScope.launch {
+            firebaseRepository.loadSavedCharactersList(_loadSavedCharactersList)
+        }
+    }
 
 }

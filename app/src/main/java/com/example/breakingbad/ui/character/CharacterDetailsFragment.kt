@@ -17,6 +17,7 @@ import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
 import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.util.Resource
+import com.example.breakingbad.util.Utils.savedCharacterslist
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -36,26 +37,41 @@ class CharacterDetailsFragment :
 
     override fun start() {
 
+        loadSavedCharacters()
 
-//        onBackPressed()
+        Log.d("---", "saved characters list -> $savedCharacterslist")
         setCharacterInformation()
         setRecycler()
 
 
         getQuotes()
-//        getQuotesLiveData()
+
         setListeners()
 
     }
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun saveCharacter(){
-        val characterId=args.bbCharacterInformation.charId
+    private fun loadSavedCharacters() {
+        viewModel.loadSavedCharacters()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.loadSavedCharactersList.collect {
+                    Log.d("---", "user info -> $it")
+                }
+            }
+        }
+
+    }
+
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    private fun saveCharacter() {
+        val characterId = args.bbCharacterInformation.charId
         viewModel.saveCharacterId(characterId)
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.saveCharacter.collect {
-                    when(it){
+                    when (it) {
                         is Resource.Loading -> {
                             showLoading()
                         }

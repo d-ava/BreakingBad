@@ -34,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private lateinit var bbadapter: BBAdapter
 
-    //    private val viewModel: HomeViewModel by activityViewModels()
+
     private val sharedViewModel: CharactersViewModel by activityViewModels()
 
     override fun start() {

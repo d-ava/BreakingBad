@@ -16,6 +16,8 @@ object Utils {
     var databaseReference = database.reference.child("user")
 
 
+    var savedCharacterslist=""
+
     fun showLoadingDialog(context: Context): Dialog {
         val progressDialog = Dialog(context)
 
