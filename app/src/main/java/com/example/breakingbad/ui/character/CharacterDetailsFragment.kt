@@ -17,6 +17,7 @@ import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
 import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.util.Resource
+import com.example.breakingbad.util.Utils.authUserInfo
 import com.example.breakingbad.util.Utils.savedCharacterslist
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,6 +59,7 @@ class CharacterDetailsFragment :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.loadSavedCharactersList.collect {
                     Log.d("---", "user info -> $it")
+                    authUserInfo=it
                 }
             }
         }

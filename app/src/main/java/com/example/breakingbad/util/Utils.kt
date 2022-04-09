@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import androidx.core.graphics.drawable.toDrawable
 import com.example.breakingbad.R
+import com.example.breakingbad.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -17,6 +18,7 @@ object Utils {
 
 
     var savedCharacterslist=""
+    var authUserInfo: User = User()
 
     fun showLoadingDialog(context: Context): Dialog {
         val progressDialog = Dialog(context)

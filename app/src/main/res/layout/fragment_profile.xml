@@ -36,14 +36,14 @@
         android:text="Name" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/tvEmail"
         style="@style/descriptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvName"
-        android:text="Username" />
+        android:text="@string/email" />
 
     <View
         android:id="@+id/viewLine"
@@ -55,7 +55,7 @@
         android:background="@color/bb_control_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+        app:layout_constraintTop_toBottomOf="@id/tvEmail" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/descriptionTextBook"
