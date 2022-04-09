@@ -82,26 +82,6 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
     }
 
 
-//    private fun getEpisodes() {
-//
-//        val series = args.series
-//        lifecycleScope.launchWhenStarted {
-//            withContext(Dispatchers.IO) {
-//                val response = NetworkClient.bbEpisodesApi.getEpisodes()
-//                val body = response.body()
-//                if (response.isSuccessful && body != null) {
-//                    withContext(Dispatchers.Main) {
-//                        episodesAdapter.setData(body.filter { series[1] in it.series && series[0] in it.season })
-//                    }
-//
-//
-//                }
-//            }
-//        }
-//
-//
-//    }
-
     private fun setListeners() {
         binding.backArrow.setOnClickListener {
             findNavController().popBackStack()

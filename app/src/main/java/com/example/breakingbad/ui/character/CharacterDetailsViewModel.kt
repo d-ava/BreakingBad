@@ -1,5 +1,6 @@
 package com.example.breakingbad.ui.character
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.breakingbad.api.NetworkClient
@@ -24,6 +25,24 @@ class CharacterDetailsViewModel @Inject constructor(private val repository: Quot
         val loadQuotes: SharedFlow<Resource<List<BBQuotes>>?> =
             repository.getQuotes().shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 
+
+
+//val loadQuotes = repository.getQuotes()
+
+    private  val _fetchQuotes = MutableLiveData<Resource<List<BBQuotes>>>()
+    val fetchQuotes = _fetchQuotes
+
+    init {
+        fetchQuotes()
+    }
+
+    private fun fetchQuotes(){
+        viewModelScope.launch {
+            repository.getQuotes().collect {
+                _fetchQuotes.value=it
+            }
+        }
+    }
 
 
 

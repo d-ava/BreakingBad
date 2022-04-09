@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.breakingbad.util.Utils
 
@@ -39,6 +41,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: inflate<VB>) 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         start()
+        onBackPressed()
     }
 
     override fun onDestroyView() {
@@ -56,6 +59,15 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: inflate<VB>) 
 
     }
 
+
+    private fun onBackPressed() {
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().popBackStack()
+
+            }
+        })
+    }
 
 
 

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
@@ -37,14 +38,42 @@ class CharacterDetailsFragment :
 
 
         setListeners()
-        onBackPressed()
+//        onBackPressed()
         setCharacterInformation()
         setRecycler()
 
 
         getQuotes()
+//        getQuotesLiveData()
 
+    }
 
+    private fun getQuotesLiveData(){
+        viewModel.fetchQuotes.observe(this, Observer {
+            when (it) {
+                is Resource.Loading -> {
+                    showLoading()
+                }
+                is Resource.Success -> {
+                    hideLoading()
+                    var quotes = ""
+                    for (quote in it.data!!) {
+                        if (quote.author.lowercase() == args.bbCharacterInformation.name.lowercase()) {
+                            quotes = quotes + quote.quote + "\n\n"
+                        }
+                    }
+                    binding.tvQuotes.text = quotes
+
+//                            bbQuotes=it.data!!
+                    Log.d("---", "get quotes ${it.data}")
+                }
+                is Resource.Error -> {
+                    hideLoading()
+                    view?.makeSnackbar(it.message!!)
+                }
+                else -> Unit
+            }
+        })
     }
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
@@ -110,15 +139,6 @@ class CharacterDetailsFragment :
             appearanceList.add(series.toString() + "S") //"S" for better call "S"aul
         }
 
-//        Log.d("---", "$appearanceList")
-
-//        quotes
-//        for (quote in bbQuotes) {
-//            if (quote.author.lowercase() == character.name.lowercase()) {
-//                quotes = quotes + quote.quote + "\n\n"
-//            }
-//        }
-//        binding.tvQuotes.text = quotes
 
 
     }
@@ -126,7 +146,7 @@ class CharacterDetailsFragment :
 
     private fun setRecycler() {
         seriesAdapter = SeriesAdapter {
-//            view?.makeSnackbar(it)
+
             val action = CharacterDetailsFragmentDirections.toSeasonFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
         }
@@ -149,12 +169,12 @@ class CharacterDetailsFragment :
         }
     }
 
-    private fun onBackPressed() {
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().popBackStack()
-
-            }
-        })
-    }
+//    private fun onBackPressed() {
+//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                findNavController().popBackStack()
+//
+//            }
+//        })
+//    }
 }

@@ -24,8 +24,9 @@ class QuotesRepository @Inject constructor(
                 val response = quotesApi.getQuotes()
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
-                    emit(Resource.Success(body))
                     quotesDao.insertQuotes(body)
+
+                    emit(Resource.Success(body))
                 } else {
                     emit(Resource.Error("unknown error"))
                 }
