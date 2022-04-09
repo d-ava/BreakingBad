@@ -16,6 +16,26 @@ import javax.inject.Inject
 
 class FirebaseRepository @Inject constructor() {
 
+
+    suspend fun logInUser(
+        email: String,
+        password: String
+    ): Flow<Resource<AuthResult>> {
+        return flow {
+            try {
+                emit(Resource.Loading())
+                val result = auth.signInWithEmailAndPassword(email, password).await()
+            emit(Resource.Success(result))
+            } catch (e:FirebaseNetworkException){
+                emit(Resource.Error(e.message ?: "network error"))
+            }catch (e:Exception){
+                emit(Resource.Error(e.message?:"unknown error"))
+            }
+
+
+        }.flowOn(Dispatchers.IO)
+    }
+
     suspend fun registerUser(
         name: String,
         email: String,
@@ -33,7 +53,7 @@ class FirebaseRepository @Inject constructor() {
 
                             val userId = registrationResult.user?.uid!!
                             val newUser = User(
-                                name=name,
+                                name = name,
                                 email = email,
                                 characterIdsList = mutableListOf()
                             )
@@ -41,23 +61,21 @@ class FirebaseRepository @Inject constructor() {
                             emit(Resource.Success(registrationResult))
 
 
-                        }catch (e: FirebaseNetworkException){
+                        } catch (e: FirebaseNetworkException) {
                             emit(Resource.Error(e.message ?: "network connection error"))
-                        }catch (e: Exception){
-                            emit(Resource.Error(e.message ?:"unknown error"))
+                        } catch (e: Exception) {
+                            emit(Resource.Error(e.message ?: "unknown error"))
                         }
-                    }else{
+                    } else {
                         emit(Resource.Error("password mismatching"))
                     }
-                }else{
+                } else {
                     emit(Resource.Error("enter valid email"))
                 }
-            }else{
+            } else {
                 emit(Resource.Error("fields are empty"))
             }
         }.flowOn(Dispatchers.IO)
-
-
     }
 
 

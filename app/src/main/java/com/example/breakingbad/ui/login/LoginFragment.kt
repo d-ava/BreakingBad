@@ -1,39 +1,64 @@
 package com.example.breakingbad.ui.login
 
+import android.annotation.SuppressLint
 import android.util.Log
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.breakingbad.databinding.FragmentLoginBinding
+import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.ui.BaseFragment
+import com.example.breakingbad.util.Resource
+import com.example.breakingbad.util.Utils.auth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    lateinit var auth: FirebaseAuth
+    private val viewmodel:LoginViewModel by viewModels()
+
 
     override fun start() {
-        auth = Firebase.auth
+
 
         setListeners()
     }
 
-    private fun logInUser() {
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    private fun logInUser(){
+        val email = binding.etEmail.text.toString()
+        val password = binding.etPassword.text.toString()
+        viewmodel.logInUser(email, password)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewmodel.login.collect {
+                    when(it){
+                        is Resource.Loading -> {
+                            showLoading()
+                        }
+                        is Resource.Success -> {
+                            hideLoading()
+                            view?.makeSnackbar("login successfull uid= ${auth.uid}")
+                        }
+                        is Resource.Error -> {
+                            hideLoading()
+                            view?.makeSnackbar("${it.message}")
+                        }
 
-        auth.signInWithEmailAndPassword(
-            binding.etEmail.text.toString(),
-            binding.etPassword.text.toString()
-        ).addOnCompleteListener(requireActivity()) {
-            if (it.isSuccessful){
-                Log.d("---", "login successfull")
-
-            }else{
-                Log.d("---", "problem with login")
+                    }
+                }
             }
         }
-
     }
+
 
     private fun setListeners() {
 

@@ -60,7 +60,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                             view?.makeSnackbar("${it.message}")
                         }
 
-
                     }
                 }
             }
