@@ -65,13 +65,21 @@ class CharacterDetailsFragment :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.loadSavedCharactersList.collect {
 //                    Log.d("---", "characterId -> ${it.characterId}")
-                    if (convertStringToListOfInt(it.characterId).contains(args.bbCharacterInformation.charId)){
+                    val tempList = convertStringToListOfInt(it.characterId)
+                    val charId = args.bbCharacterInformation.charId
+                    if (tempList.contains(charId)) {
                         binding.btnAddRemove.text = "Remove001"
-                    }else{
+                        binding.btnAddRemove.setOnClickListener {
+                            tempList.remove(charId)
+
+                            saveRemoveCharacter(tempList.joinToString(","))
+                        }
+
+                    } else {
                         binding.btnAddRemove.text = "Add001"
                         binding.btnAddRemove.setOnClickListener {
 
-                            savedCharacterslist += ",${args.bbCharacterInformation.charId.toString()}"
+                            savedCharacterslist += ",${args.bbCharacterInformation.charId}"
                             saveRemoveCharacter(savedCharacterslist)
 
                         }
