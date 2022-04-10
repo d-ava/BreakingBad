@@ -51,7 +51,7 @@ class CharacterDetailsFragment :
         loadSavedCharacters()
 
         setListeners()
-//        saveRemoveButton()
+
         Log.d("---", "saved characters list chdetail-> ${Utils.savedCharacterslist}")
 
     }
@@ -64,11 +64,11 @@ class CharacterDetailsFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.loadSavedCharactersList.collect {
-//                    Log.d("---", "characterId -> ${it.characterId}")
+
                     val tempList = convertStringToListOfInt(it.characterId)
                     val charId = args.bbCharacterInformation.charId
                     if (tempList.contains(charId)) {
-                        binding.btnAddRemove.text = "Remove001"
+                        binding.btnAddRemove.text = getString(R.string.remove)
                         binding.btnAddRemove.setOnClickListener {
                             tempList.remove(charId)
 
@@ -76,7 +76,7 @@ class CharacterDetailsFragment :
                         }
 
                     } else {
-                        binding.btnAddRemove.text = "Add001"
+                        binding.btnAddRemove.text = getString(R.string.add)
                         binding.btnAddRemove.setOnClickListener {
 
                             savedCharacterslist += ",${args.bbCharacterInformation.charId}"
@@ -91,25 +91,25 @@ class CharacterDetailsFragment :
 
     }
 
-    private fun saveRemoveButton() {
-
-        if (intList.contains(args.bbCharacterInformation.charId)) {
-
-
-            binding.btnAddRemove.text = "Remove"
-
-        } else {
-            binding.btnAddRemove.text = "Add"
-            binding.btnAddRemove.setOnClickListener {
-
-                savedCharacterslist += ",${args.bbCharacterInformation.charId.toString()}"
-                saveRemoveCharacter(savedCharacterslist)
-
-            }
-
-        }
-
-    }
+//    private fun saveRemoveButton() {
+//
+//        if (intList.contains(args.bbCharacterInformation.charId)) {
+//
+//
+//            binding.btnAddRemove.text = "Remove"
+//
+//        } else {
+//            binding.btnAddRemove.text = "Add"
+//            binding.btnAddRemove.setOnClickListener {
+//
+//                savedCharacterslist += ",${args.bbCharacterInformation.charId.toString()}"
+//                saveRemoveCharacter(savedCharacterslist)
+//
+//            }
+//
+//        }
+//
+//    }
 
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
@@ -126,7 +126,7 @@ class CharacterDetailsFragment :
                         }
                         is Resource.Success -> {
                             hideLoading()
-                            view?.makeSnackbar("character saved")
+
                         }
                         is Resource.Error -> {
                             hideLoading()
@@ -255,12 +255,4 @@ class CharacterDetailsFragment :
 
     }
 
-//    private fun onBackPressed() {
-//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                findNavController().popBackStack()
-//
-//            }
-//        })
-//    }
 }
