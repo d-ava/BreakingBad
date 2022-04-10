@@ -19,6 +19,7 @@ import com.example.breakingbad.ui.character.intList
 import com.example.breakingbad.ui.home.BBAdapter
 import com.example.breakingbad.ui.viewModel.CharactersViewModel
 import com.example.breakingbad.util.Resource
+import com.example.breakingbad.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -29,14 +30,15 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>(FragmentSavedBinding::i
     private lateinit var searchAdapter: BBAdapter
     private val sharedViewModel: CharactersViewModel by activityViewModels()
 
-    private var newSavedList = mutableListOf<BBCharacter>()
+    private var newSavedCharacterIdList:List<Int> = listOf()
 
     override fun start() {
-
+        loadSavedCharacterIdList()
         setRecycler()
         getCharacters()
 
     }
+
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun getCharacters() {
@@ -49,13 +51,12 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>(FragmentSavedBinding::i
                         }
                         is Resource.Success -> {
                             hideLoading()
-
-                            for (character in it.data!!) {
-                                if (intList.contains(character.charId)) {
-                                    newSavedList.add(character)
+                            var newSavedList:MutableList<BBCharacter> = mutableListOf()
+                            for (id in it.data!!){
+                                if (newSavedCharacterIdList.contains(id.charId)){
+                                    newSavedList.add(id)
                                 }
                             }
-                            Log.d("---", "newsavedlist -> ${newSavedList.size}")
                             searchAdapter.setData(newSavedList)
 
                         }
@@ -69,6 +70,25 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>(FragmentSavedBinding::i
                 }
             }
         }
+    }
+
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    private fun loadSavedCharacterIdList() {
+
+        sharedViewModel.loadSavedCharacters()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sharedViewModel.loadSavedCharactersList.collect {
+
+                    newSavedCharacterIdList=Utils.convertStringToListOfInt(it.characterId)
+
+
+
+                }
+            }
+        }
+
     }
 
     private fun setRecycler() {

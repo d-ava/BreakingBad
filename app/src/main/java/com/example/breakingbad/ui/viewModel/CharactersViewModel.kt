@@ -8,10 +8,7 @@ import com.example.breakingbad.repository.CharactersRepository
 import com.example.breakingbad.repository.FirebaseRepository
 import com.example.breakingbad.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,6 +29,17 @@ class CharactersViewModel @Inject constructor(private val repository: Characters
     fun loadSavedCharacters(){
         viewModelScope.launch {
             firebaseRepository.loadSavedCharactersList(_loadSavedCharactersList)
+        }
+    }
+
+    private val _loadCharactersById:MutableSharedFlow<Resource<BBCharacter>> = MutableSharedFlow()
+    val loadCharactersById:SharedFlow<Resource<BBCharacter>> = _loadCharactersById
+
+    fun loadCharactersById(id:Int){
+        viewModelScope.launch {
+            repository.getCharacterById(id).collect {
+                _loadCharactersById.emit(it!!)
+            }
         }
     }
 

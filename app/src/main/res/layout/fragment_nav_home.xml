@@ -6,11 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin32"
+app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/bb_control_color"
+        android:elevation="8dp"
+        android:id="@+id/topCover"/>
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvUid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/topCover"
         app:layout_constraintTop_toTopOf="parent"
         android:elevation="@dimen/margin16"
         android:layout_margin="8dp"
@@ -23,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/homeNavTabBar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topCover"
         android:layout_marginBottom="2dp"
         app:navGraph="@navigation/home_nav_graph" />
 

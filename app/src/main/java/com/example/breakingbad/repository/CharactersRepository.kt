@@ -42,7 +42,26 @@ class CharactersRepository @Inject constructor(
         return bbDao.getAllCharacters()?.let {
             Resource.Success(it)
         }
-
-
     }
+
+    fun getCharacterById(id:Int):Flow<Resource<BBCharacter>?>{
+        return flow{
+            try {
+                emit(Resource.Loading())
+                emit(getCharacterByIdCashed(id))
+
+            }catch (e:Exception){
+                emit(Resource.Error(e.message?:"unknown error"))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    private fun getCharacterByIdCashed(id:Int):Resource<BBCharacter>?{
+        return bbDao.getCharacterById(id)?.let {
+            Resource.Success(it)
+        }
+    }
+
+
+
 }

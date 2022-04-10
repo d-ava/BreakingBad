@@ -20,5 +20,7 @@ interface BBDao {
     @Query("SELECT * FROM bb_table WHERE name = :character")
     fun getCharacterByName(character: String): Flow<BBCharacter>
 
+    @Query("SELECT * FROM bb_table WHERE charId = :charId")
+    fun getCharacterById(charId:Int):BBCharacter?
 
 }
