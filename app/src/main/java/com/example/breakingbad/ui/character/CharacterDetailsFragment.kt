@@ -68,6 +68,7 @@ class CharacterDetailsFragment :
                 savedCharacterslist += ",${args.bbCharacterInformation.charId.toString()}"
                 saveRemoveCharacter(savedCharacterslist)
             }
+
         }
 
     }

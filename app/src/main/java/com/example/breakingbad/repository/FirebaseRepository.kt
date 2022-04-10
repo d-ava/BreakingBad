@@ -79,7 +79,7 @@ class FirebaseRepository @Inject constructor() {
                             val newUser = User(
                                 name = name,
                                 email = email,
-                                characterId = mutableListOf(0,0)
+                                characterId = "0"
                             )
                             databaseReference.child(userId).setValue(newUser)
                             emit(Resource.Success(registrationResult))
