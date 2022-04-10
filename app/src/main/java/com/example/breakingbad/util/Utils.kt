@@ -34,7 +34,7 @@ object Utils {
         }
     }
 
-    fun convertStringToListOfInt(str:String):List<Int>{
+    fun convertStringToListOfInt(str:String):MutableList<Int>{
         var newList0 = mutableListOf<String>()
         val newIntList0 = mutableListOf<Int>()
 

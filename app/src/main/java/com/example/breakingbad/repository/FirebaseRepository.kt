@@ -25,14 +25,14 @@ import javax.inject.Inject
 
 class FirebaseRepository @Inject constructor() {
 
-    fun saveCharacter(id: Int): Flow<Resource<Boolean>> {
+    fun saveCharacter(id: String): Flow<Resource<Boolean>> {
         val user = auth.currentUser
         val userReference = databaseReference.child(user?.uid!!)
 
         return flow {
             try {
 //                var newTestList:MutableList = mutableListOf()
-                userReference.child("characterId").setValue("4,3,54,0,1,$id").await()
+                userReference.child("characterId").setValue(id).await()
                 emit(Resource.Success())
             } catch (e: IOException) {
                 emit(Resource.Error(e.message ?: "unknown error"))

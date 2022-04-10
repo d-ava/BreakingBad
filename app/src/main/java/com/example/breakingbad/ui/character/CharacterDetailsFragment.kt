@@ -1,14 +1,9 @@
 package com.example.breakingbad.ui.character
 
 import android.annotation.SuppressLint
-import android.opengl.Visibility
 import android.util.Log
-import android.view.View
-import androidx.activity.OnBackPressedCallback
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
@@ -21,8 +16,6 @@ import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.util.Resource
 import com.example.breakingbad.util.Utils
-import com.example.breakingbad.util.Utils.auth
-import com.example.breakingbad.util.Utils.authUserInfo
 import com.example.breakingbad.util.Utils.convertStringToListOfInt
 import com.example.breakingbad.util.Utils.savedCharacterslist
 import com.squareup.picasso.Picasso
@@ -44,7 +37,7 @@ class CharacterDetailsFragment :
     private val savedCharactersListInt = mutableListOf<Int>()
     val newCharactersList = mutableListOf<Int>()
 
-    private var intList:List<Int> = listOf()
+    private var intList:MutableList<Int> = mutableListOf()
 
     override fun start() {
 
@@ -64,19 +57,27 @@ class CharacterDetailsFragment :
     private fun saveRemoveButton(){
 
         if (intList.contains(args.bbCharacterInformation.charId)){
-            Log.d("---", "yes contains")
+
+
+            binding.btnAddRemove.text = "Remove"
+
         }else{
-            Log.d("---", "no not contains")
+            binding.btnAddRemove.text = "Add"
+            binding.btnAddRemove.setOnClickListener {
+
+                savedCharacterslist += ",${args.bbCharacterInformation.charId.toString()}"
+                saveRemoveCharacter(savedCharacterslist)
+            }
         }
 
     }
 
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun saveCharacter() {
+    private fun saveRemoveCharacter(newList:String) {
 
 
-        viewModel.saveCharacterId(args.bbCharacterInformation.charId)
+        viewModel.saveCharacterId(newList)
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.saveCharacter.collect {
@@ -212,11 +213,7 @@ class CharacterDetailsFragment :
             findNavController().popBackStack()
         }
 
-        binding.btnAddRemove.setOnClickListener {
 
-            saveCharacter()
-
-        }
     }
 
 //    private fun onBackPressed() {

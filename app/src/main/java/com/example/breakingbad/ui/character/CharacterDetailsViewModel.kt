@@ -51,9 +51,9 @@ class CharacterDetailsViewModel @Inject constructor(
     private val _saveCharacter:MutableSharedFlow<Resource<Boolean>> = MutableSharedFlow()
     val saveCharacter:SharedFlow<Resource<Boolean>> = _saveCharacter
 
-    fun saveCharacterId(characterId:Int){
+    fun saveCharacterId(newListInt:String){
         viewModelScope.launch {
-            firebaseRepository.saveCharacter(characterId).collect {
+            firebaseRepository.saveCharacter(newListInt).collect {
                 _saveCharacter.emit(it)
             }
         }
