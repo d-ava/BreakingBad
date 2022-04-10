@@ -31,7 +31,8 @@ class FirebaseRepository @Inject constructor() {
 
         return flow {
             try {
-                userReference.child("characterId").setValue(mutableListOf("45", "1", "10")).await()
+//                var newTestList:MutableList = mutableListOf()
+                userReference.child("characterId").setValue("4,3,54,0,1,$id").await()
                 emit(Resource.Success())
             } catch (e: IOException) {
                 emit(Resource.Error(e.message ?: "unknown error"))
@@ -113,7 +114,7 @@ class FirebaseRepository @Inject constructor() {
                     name = snapshot.child("name").value.toString(),
                     email = auth.currentUser?.email.toString(),
                 )
-                savedCharacterslist =snapshot.child("characterId").value.toString()
+                savedCharacterslist = snapshot.child("characterId").value.toString()
 
                 CoroutineScope(IO).launch {
                     userForFlow.emit(userInfo)

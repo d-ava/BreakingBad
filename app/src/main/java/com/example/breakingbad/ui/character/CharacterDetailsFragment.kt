@@ -23,6 +23,7 @@ import com.example.breakingbad.util.Resource
 import com.example.breakingbad.util.Utils
 import com.example.breakingbad.util.Utils.auth
 import com.example.breakingbad.util.Utils.authUserInfo
+import com.example.breakingbad.util.Utils.convertStringToListOfInt
 import com.example.breakingbad.util.Utils.savedCharacterslist
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,13 +39,16 @@ class CharacterDetailsFragment :
     private val appearanceList = mutableListOf<String>()
     private lateinit var seriesAdapter: SeriesAdapter
     private val viewModel: CharacterDetailsViewModel by viewModels()
-//
-//    val charList: MutableList<String> = mutableListOf()
+
+    //to add/remove character to savedCharactersList
+    private val savedCharactersListInt = mutableListOf<Int>()
+    val newCharactersList = mutableListOf<Int>()
+
+    private var intList:List<Int> = listOf()
 
     override fun start() {
 
-
-
+        intList = convertStringToListOfInt(savedCharacterslist)
         setCharacterInformation()
         setRecycler()
 
@@ -52,24 +56,27 @@ class CharacterDetailsFragment :
         getQuotes()
 
         setListeners()
-        saveRemoveCharacter()
+        saveRemoveButton()
         Log.d("---", "saved characters list chdetail-> ${Utils.savedCharacterslist}")
 
     }
 
-    private fun saveRemoveCharacter(){
-        if (auth.currentUser == null){
-            binding.btnAddRemove.visibility= View.INVISIBLE
-        }
-    }
+    private fun saveRemoveButton(){
 
+        if (intList.contains(args.bbCharacterInformation.charId)){
+            Log.d("---", "yes contains")
+        }else{
+            Log.d("---", "no not contains")
+        }
+
+    }
 
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun saveCharacter() {
-        val characterId = args.bbCharacterInformation.charId
-        val newList =
-        viewModel.saveCharacterId(characterId)
+
+
+        viewModel.saveCharacterId(args.bbCharacterInformation.charId)
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.saveCharacter.collect {
@@ -206,8 +213,8 @@ class CharacterDetailsFragment :
         }
 
         binding.btnAddRemove.setOnClickListener {
-            saveCharacter()
 
+            saveCharacter()
 
         }
     }

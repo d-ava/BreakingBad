@@ -22,6 +22,7 @@ import com.example.breakingbad.ui.character.CharacterDetailsFragmentDirections
 import com.example.breakingbad.ui.viewModel.CharactersViewModel
 import com.example.breakingbad.util.Resource
 import com.example.breakingbad.util.Utils
+import com.example.breakingbad.util.Utils.auth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -42,9 +43,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
 //        checkAndLoadCharacters()
         setRecycler()
-        loadSavedCharacters()
+        if (auth.currentUser != null){
+            loadSavedCharacters()
+            Log.d("---", "saved characters list home-> ${Utils.savedCharacterslist}")
+        }
+//
         getCharacters()
-        Log.d("---", "saved characters list home-> ${Utils.savedCharacterslist}")
+
 
     }
 

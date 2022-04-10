@@ -17,7 +17,7 @@ object Utils {
     var databaseReference = database.reference.child("user")
 
 
-    var savedCharacterslist=""
+    var savedCharacterslist = ""
     var authUserInfo: User = User()
 
     fun showLoadingDialog(context: Context): Dialog {
@@ -32,6 +32,16 @@ object Utils {
 
             return it
         }
+    }
+
+    fun convertStringToListOfInt(str:String):List<Int>{
+        var newList0 = mutableListOf<String>()
+        val newIntList0 = mutableListOf<Int>()
+
+        newList0 = str.split(",").toMutableList()
+        newList0.forEach { newIntList0.add(it.toInt()) }
+
+        return newIntList0
     }
 
 }
