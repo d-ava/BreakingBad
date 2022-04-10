@@ -23,6 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+var intList:MutableList<Int> = mutableListOf()
+
 @AndroidEntryPoint
 class CharacterDetailsFragment :
     BaseFragment<FragmentCharacterDetailsBinding>(FragmentCharacterDetailsBinding::inflate) {
@@ -37,7 +39,7 @@ class CharacterDetailsFragment :
     private val savedCharactersListInt = mutableListOf<Int>()
     val newCharactersList = mutableListOf<Int>()
 
-    private var intList:MutableList<Int> = mutableListOf()
+
 
     override fun start() {
 

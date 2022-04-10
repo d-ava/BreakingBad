@@ -28,7 +28,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private lateinit var searchAdapter: BBAdapter
 
-    //    private val viewModel: SearchViewModel by viewModels()
+
     private val sharedViewModel: CharactersViewModel by activityViewModels()
 
     private val emptyList = mutableListOf<BBCharacter>()
