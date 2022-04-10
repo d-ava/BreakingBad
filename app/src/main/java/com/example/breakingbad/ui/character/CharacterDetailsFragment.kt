@@ -23,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-var intList:MutableList<Int> = mutableListOf()
+var intList: MutableList<Int> = mutableListOf()
 
 @AndroidEntryPoint
 class CharacterDetailsFragment :
@@ -40,7 +40,6 @@ class CharacterDetailsFragment :
     val newCharactersList = mutableListOf<Int>()
 
 
-
     override fun start() {
 
         intList = convertStringToListOfInt(savedCharacterslist)
@@ -49,26 +48,55 @@ class CharacterDetailsFragment :
 
 
         getQuotes()
+        loadSavedCharacters()
 
         setListeners()
-        saveRemoveButton()
+//        saveRemoveButton()
         Log.d("---", "saved characters list chdetail-> ${Utils.savedCharacterslist}")
 
     }
 
-    private fun saveRemoveButton(){
+    //load to change button textt and action
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    private fun loadSavedCharacters() {
+        viewModel.loadSavedCharacters()
 
-        if (intList.contains(args.bbCharacterInformation.charId)){
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.loadSavedCharactersList.collect {
+//                    Log.d("---", "characterId -> ${it.characterId}")
+                    if (convertStringToListOfInt(it.characterId).contains(args.bbCharacterInformation.charId)){
+                        binding.btnAddRemove.text = "Remove001"
+                    }else{
+                        binding.btnAddRemove.text = "Add001"
+                        binding.btnAddRemove.setOnClickListener {
+
+                            savedCharacterslist += ",${args.bbCharacterInformation.charId.toString()}"
+                            saveRemoveCharacter(savedCharacterslist)
+
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    private fun saveRemoveButton() {
+
+        if (intList.contains(args.bbCharacterInformation.charId)) {
 
 
             binding.btnAddRemove.text = "Remove"
 
-        }else{
+        } else {
             binding.btnAddRemove.text = "Add"
             binding.btnAddRemove.setOnClickListener {
 
                 savedCharacterslist += ",${args.bbCharacterInformation.charId.toString()}"
                 saveRemoveCharacter(savedCharacterslist)
+
             }
 
         }
@@ -77,7 +105,7 @@ class CharacterDetailsFragment :
 
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun saveRemoveCharacter(newList:String) {
+    private fun saveRemoveCharacter(newList: String) {
 
 
         viewModel.saveCharacterId(newList)

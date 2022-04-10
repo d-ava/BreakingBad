@@ -113,6 +113,7 @@ class FirebaseRepository @Inject constructor() {
                 userInfo = User(
                     name = snapshot.child("name").value.toString(),
                     email = auth.currentUser?.email.toString(),
+                    characterId = snapshot.child("characterId").value.toString()
                 )
                 savedCharacterslist = snapshot.child("characterId").value.toString()
 
