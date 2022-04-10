@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-android:background="@color/bb_background"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bb_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="@dimen/margin16"
+        android:layout_margin="8dp"
+        tools:text="bob5@gmail.com"
+        style="@style/descriptionTextBook"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/homeNavContainer"

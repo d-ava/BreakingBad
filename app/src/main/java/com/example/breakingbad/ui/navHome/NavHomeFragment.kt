@@ -5,11 +5,17 @@ import androidx.navigation.findNavController
 import com.example.breakingbad.R
 import com.example.breakingbad.databinding.FragmentNavHomeBinding
 import com.example.breakingbad.ui.BaseFragment
+import com.example.breakingbad.util.Utils.auth
 
 class NavHomeFragment : BaseFragment<FragmentNavHomeBinding>(FragmentNavHomeBinding::inflate) {
     override fun start() {
 
         setListeners()
+
+        auth.currentUser.let {
+            binding.tvUid.text = it?.email
+        }
+
     }
 
 

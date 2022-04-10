@@ -31,7 +31,7 @@ class FirebaseRepository @Inject constructor() {
 
         return flow {
             try {
-                userReference.child("characterId").setValue(mutableListOf(id, 9, 7)).await()
+                userReference.child("characterId").setValue(mutableListOf("45", "1", "10")).await()
                 emit(Resource.Success())
             } catch (e: IOException) {
                 emit(Resource.Error(e.message ?: "unknown error"))
@@ -78,7 +78,7 @@ class FirebaseRepository @Inject constructor() {
                             val newUser = User(
                                 name = name,
                                 email = email,
-                                characterIdsList = mutableListOf()
+                                characterId = mutableListOf(0,0)
                             )
                             databaseReference.child(userId).setValue(newUser)
                             emit(Resource.Success(registrationResult))

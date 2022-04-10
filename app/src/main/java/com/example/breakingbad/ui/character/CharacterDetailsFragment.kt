@@ -1,8 +1,11 @@
 package com.example.breakingbad.ui.character
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.util.Log
+import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -17,6 +20,8 @@ import com.example.breakingbad.databinding.FragmentCharacterDetailsBinding
 import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.util.Resource
+import com.example.breakingbad.util.Utils
+import com.example.breakingbad.util.Utils.auth
 import com.example.breakingbad.util.Utils.authUserInfo
 import com.example.breakingbad.util.Utils.savedCharacterslist
 import com.squareup.picasso.Picasso
@@ -38,9 +43,8 @@ class CharacterDetailsFragment :
 
     override fun start() {
 
-        loadSavedCharacters()
 
-        Log.d("---", "saved characters list -> $savedCharacterslist")
+
         setCharacterInformation()
         setRecycler()
 
@@ -48,27 +52,23 @@ class CharacterDetailsFragment :
         getQuotes()
 
         setListeners()
+        saveRemoveCharacter()
+        Log.d("---", "saved characters list chdetail-> ${Utils.savedCharacterslist}")
 
     }
 
-    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun loadSavedCharacters() {
-        viewModel.loadSavedCharacters()
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.loadSavedCharactersList.collect {
-                    Log.d("---", "user info -> $it")
-                    authUserInfo=it
-                }
-            }
+    private fun saveRemoveCharacter(){
+        if (auth.currentUser == null){
+            binding.btnAddRemove.visibility= View.INVISIBLE
         }
-
     }
+
+
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun saveCharacter() {
         val characterId = args.bbCharacterInformation.charId
+        val newList =
         viewModel.saveCharacterId(characterId)
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

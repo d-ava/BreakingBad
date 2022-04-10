@@ -3,5 +3,5 @@ package com.example.breakingbad.model
 data class User(
     val name: String = "",
     val email: String = "",
-    val characterIdsList: List<Any?> = listOf()
+    val characterId: List<Any?> = listOf()
 )

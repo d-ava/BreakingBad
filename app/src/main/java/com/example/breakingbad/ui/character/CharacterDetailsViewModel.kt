@@ -60,15 +60,6 @@ class CharacterDetailsViewModel @Inject constructor(
     }
 
 
-    //load saved characters
 
-    private val _loadSavedCharactersList: MutableSharedFlow<User> = MutableSharedFlow()
-    val loadSavedCharactersList:SharedFlow<User> = _loadSavedCharactersList
-
-    fun loadSavedCharacters(){
-        viewModelScope.launch {
-            firebaseRepository.loadSavedCharactersList(_loadSavedCharactersList)
-        }
-    }
 
 }

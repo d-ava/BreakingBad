@@ -21,6 +21,7 @@ import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.ui.character.CharacterDetailsFragmentDirections
 import com.example.breakingbad.ui.viewModel.CharactersViewModel
 import com.example.breakingbad.util.Resource
+import com.example.breakingbad.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -39,12 +40,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun start() {
 
-        checkAndLoadCharacters()
+//        checkAndLoadCharacters()
         setRecycler()
-
+        loadSavedCharacters()
         getCharacters()
+        Log.d("---", "saved characters list home-> ${Utils.savedCharacterslist}")
 
     }
+
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    private fun loadSavedCharacters() {
+        sharedViewModel.loadSavedCharacters()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sharedViewModel.loadSavedCharactersList.collect {
+                    Log.d("---", "user info -> $it")
+                    Utils.authUserInfo =it
+                }
+            }
+        }
+
+    }
+
+
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun getCharacters() {
