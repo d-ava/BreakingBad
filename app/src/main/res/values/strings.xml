@@ -21,12 +21,11 @@
     <string name="register">REGISTER</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
-
     <string name="name">Name</string>
     <string name="add">ADD</string>
     <string name="remove">REMOVE</string>
-
     <string name="repeat_password">Repeat Password</string>
     <string name="email">Email</string>
+    <string name="language">Change Language</string>
 
 </resources>

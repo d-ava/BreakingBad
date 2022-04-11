@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="home">სახლი</string>
+    <string name="search">ძებნა</string>
+    <string name="saved">შენახულები</string>
+    <string name="profile">პროფილი</string>
+    <string name="language">ენის შეცვლა</string>
+    <string name="characters">პერსონაჟები</string>
+
 
 </resources>

@@ -62,17 +62,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin16"
-        android:text="Language"
+        android:text="@string/language"
         android:id="@+id/tvLanguage"
         app:layout_constraintBottom_toTopOf="@id/viewLine"
         app:layout_constraintStart_toStartOf="@id/viewLine" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/descriptionTextBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin16"
-        android:text="Login"
+        android:text="@string/login"
         android:id="@+id/tvLoginLogout"
         app:layout_constraintTop_toBottomOf="@id/viewLine"
         app:layout_constraintStart_toStartOf="@id/viewLine" />
