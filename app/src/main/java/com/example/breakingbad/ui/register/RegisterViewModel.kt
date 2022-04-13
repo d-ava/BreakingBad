@@ -25,21 +25,8 @@ class RegisterViewModel @Inject constructor(private val repository: FirebaseRepo
     val userRegister: SharedFlow<Resource<AuthResult>> = _userRegister
 
 
-    fun registerUser(
-        name: String,
-        email: String,
-        password: String,
-        repeatPassword: String
-    ) {
-        viewModelScope.launch {
-            _userRegister.emit(Resource.Loading())
-            repository.registerUser(name, email, password, repeatPassword).collect {
-                _userRegister.emit(it)
-            }
-        }
-    }
 
-    fun registerUser02(
+    fun registerUser(
         name: String,
         email: String,
         password: String,
@@ -51,7 +38,7 @@ class RegisterViewModel @Inject constructor(private val repository: FirebaseRepo
                 if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     if (password == repeatPassword) {
                         _userRegister.emit(Resource.Loading())
-                        repository.registerUser02(name, email, password, repeatPassword).collect {
+                        repository.registerUser(name, email, password, repeatPassword).collect {
                             _userRegister.emit(it)
                         }
 

@@ -27,5 +27,6 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="email">Email</string>
     <string name="language">Change Language</string>
+    <string name="first_login">First Log In</string>
 
 </resources>

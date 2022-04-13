@@ -18,17 +18,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         changeLanguage()
 
 
-
     }
 
-    private fun changeLanguage(){
-        if (lang==""){
+    private fun changeLanguage() {
+        if (lang == "") {
             lang = "ka"
             binding.tvLanguage.setOnClickListener {
                 activity?.recreate()
             }
-        }else if(lang=="ka"){
-            lang=""
+        } else if (lang == "ka") {
+            lang = ""
             binding.tvLanguage.setOnClickListener {
                 activity?.recreate()
             }
@@ -51,16 +50,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun setListeners() {
         if (auth.currentUser != null) {
             binding.apply {
-                tvLoginLogout.text = "Logout"
+                tvLoginLogout.text = getString(R.string.login)
                 tvLoginLogout.setOnClickListener {
                     auth.signOut()
+                    activity?.recreate()
+//                    activity?.findNavController(R.id.mainContainer)?.navigate(R.id.toLoginFragment)
+                }
+            }
+        } else {
+            binding.apply {
+                tvLoginLogout.setOnClickListener {
+
                     activity?.findNavController(R.id.mainContainer)?.navigate(R.id.toLoginFragment)
                 }
             }
 
         }
-        binding.tvLoginLogout.setOnClickListener {
-            activity?.findNavController(R.id.mainContainer)?.navigate(R.id.toLoginFragment)
-        }
+
     }
 }

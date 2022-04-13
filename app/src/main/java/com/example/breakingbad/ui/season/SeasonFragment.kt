@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,8 +84,16 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
 
 
     private fun setListeners() {
-        binding.backArrow.setOnClickListener {
-            findNavController().popBackStack()
+        binding.apply {
+            backArrow.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+            goHome.setOnClickListener {
+                activity?.findNavController(R.id.mainContainer)?.navigate(R.id.navHomeFragment)
+            }
         }
+
+
     }
 }

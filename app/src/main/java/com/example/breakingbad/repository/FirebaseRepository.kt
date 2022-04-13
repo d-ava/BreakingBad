@@ -60,7 +60,7 @@ class FirebaseRepository @Inject constructor() {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun registerUser02(
+    suspend fun registerUser(
         name: String,
         email: String,
         password: String,
@@ -93,47 +93,7 @@ class FirebaseRepository @Inject constructor() {
 
 
 
-    suspend fun registerUser(
-        name: String,
-        email: String,
-        password: String,
-        repeatPassword: String
-    ): Flow<Resource<AuthResult>> {
-        return flow {
-            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && repeatPassword.isNotEmpty()) {
-                if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    if (password == repeatPassword) {
-                        try {
-                            emit(Resource.Loading())
-                            val registrationResult =
-                                auth.createUserWithEmailAndPassword(email, password).await()
 
-                            val userId = registrationResult.user?.uid!!
-                            val newUser = User(
-                                name = name,
-                                email = email,
-                                characterId = "0"
-                            )
-                            databaseReference.child(userId).setValue(newUser)
-                            emit(Resource.Success(registrationResult))
-
-
-                        } catch (e: FirebaseNetworkException) {
-                            emit(Resource.Error(e.message ?: "network connection error"))
-                        } catch (e: Exception) {
-                            emit(Resource.Error(e.message ?: "unknown error"))
-                        }
-                    } else {
-                        emit(Resource.Error("password mismatching"))
-                    }
-                } else {
-                    emit(Resource.Error("enter valid email"))
-                }
-            } else {
-                emit(Resource.Error("fields are empty"))
-            }
-        }.flowOn(Dispatchers.IO)
-    }
 
     suspend fun loadSavedCharactersList(userForFlow: MutableSharedFlow<User>) {
         var userInfo: User

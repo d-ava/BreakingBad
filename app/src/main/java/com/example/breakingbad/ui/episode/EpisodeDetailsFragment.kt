@@ -111,8 +111,14 @@ class EpisodeDetailsFragment :
     }
 
     private fun setListeners() {
-        binding.backArrow.setOnClickListener {
-            findNavController().popBackStack()
+        binding.apply {
+            backArrow.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            goHome.setOnClickListener {
+                activity?.findNavController(R.id.mainContainer)?.navigate(R.id.toNavHomeFragment)
+            }
+
         }
     }
 }

@@ -91,25 +91,7 @@ class CharacterDetailsFragment :
 
     }
 
-//    private fun saveRemoveButton() {
-//
-//        if (intList.contains(args.bbCharacterInformation.charId)) {
-//
-//
-//            binding.btnAddRemove.text = "Remove"
-//
-//        } else {
-//            binding.btnAddRemove.text = "Add"
-//            binding.btnAddRemove.setOnClickListener {
-//
-//                savedCharacterslist += ",${args.bbCharacterInformation.charId.toString()}"
-//                saveRemoveCharacter(savedCharacterslist)
-//
-//            }
-//
-//        }
-//
-//    }
+
 
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
@@ -246,11 +228,16 @@ class CharacterDetailsFragment :
     }
 
     private fun setListeners() {
-        binding.backArrow.setOnClickListener {
+        binding.apply {
+            backArrow.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            goHome.setOnClickListener {
+                activity?.findNavController(R.id.mainContainer)?.navigate(R.id.toNavHomeFragment)
 
-
-            findNavController().popBackStack()
+            }
         }
+
 
 
     }

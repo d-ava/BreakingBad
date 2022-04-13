@@ -37,6 +37,10 @@
     </fragment>
 
     <action
+        android:id="@+id/toNavHomeFragment"
+        app:destination="@id/navHomeFragment"/>
+
+    <action
         android:id="@+id/toSeasonFragment"
         app:destination="@+id/seasonFragment" />
     <fragment

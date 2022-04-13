@@ -7,6 +7,26 @@
     <string name="profile">პროფილი</string>
     <string name="language">ენის შეცვლა</string>
     <string name="characters">პერსონაჟები</string>
+    <string name="error">შეცდომა</string>
+    <string name="details">დეტალები</string>
+    <string name="birthday">დაბ. დღე</string>
+    <string name="status">სტატუსი</string>
+    <string name="portrayed">მსახიობი</string>
+    <string name="appearances">APPEARANCES</string>
+    <string name="quotes">გამონათქვამები</string>
+    <string name="save">შენახვა</string>
+    <string name="season">სეზონი</string>
+    <string name="login">ავტორიზაცია</string>
+    <string name="don_t_have_an_account">არ გაქვს ანგარიში?</string>
+    <string name="register">დარეგისტრირდი</string>
+    <string name="password">კოდი</string>
+    <string name="username">Username</string>
+    <string name="name">სახელი</string>
+    <string name="add">დამატება</string>
+    <string name="remove">წაშლა</string>
+    <string name="repeat_password">გაიმეორე კოდი</string>
+    <string name="email">იმეილი</string>
+    <string name="first_login">ჯერ გაიარე ავტორიზაცია!</string>
 
 
 </resources>

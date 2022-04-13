@@ -20,6 +20,7 @@ import com.example.breakingbad.ui.home.BBAdapter
 import com.example.breakingbad.ui.viewModel.CharactersViewModel
 import com.example.breakingbad.util.Resource
 import com.example.breakingbad.util.Utils
+import com.example.breakingbad.util.Utils.auth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -33,9 +34,16 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>(FragmentSavedBinding::i
     private var newSavedCharacterIdList:List<Int> = listOf()
 
     override fun start() {
-        loadSavedCharacterIdList()
-        setRecycler()
-        getCharacters()
+        if (
+            auth.currentUser != null
+        ){
+            loadSavedCharacterIdList()
+            setRecycler()
+            getCharacters()
+        }else{
+            view?.makeSnackbar(getString(R.string.first_login))
+        }
+
 
     }
 

@@ -40,7 +40,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         val password = binding.etPassword.text.toString()
         val repeatPassword = binding.etRepeatPassword.text.toString()
 
-        viewModel.registerUser02(
+        viewModel.registerUser(
             name, email, password, repeatPassword
         )
 
