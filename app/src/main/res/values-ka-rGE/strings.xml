@@ -27,6 +27,7 @@
     <string name="repeat_password">გაიმეორე კოდი</string>
     <string name="email">იმეილი</string>
     <string name="first_login">ჯერ გაიარე ავტორიზაცია!</string>
+    <string name="logout">გამოსვლა</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.example.breakingbad.ui.profile
 
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.breakingbad.R
 import com.example.breakingbad.databinding.FragmentProfileBinding
 import com.example.breakingbad.ui.BaseFragment
@@ -15,26 +16,26 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         setListeners()
         setUserInfo()
 
-        changeLanguage()
+//        changeLanguage()
 
 
     }
 
-    private fun changeLanguage() {
-        if (lang == "") {
-            lang = "ka"
-            binding.tvLanguage.setOnClickListener {
-                activity?.recreate()
-            }
-        } else if (lang == "ka") {
-            lang = ""
-            binding.tvLanguage.setOnClickListener {
-                activity?.recreate()
-            }
-        }
+//    private fun changeLanguage() {
+//        if (lang == "") {
+//            lang = "ka"
+//            binding.tvLanguage.setOnClickListener {
+//                activity?.recreate()
+//            }
+//        } else if (lang == "ka") {
+//            lang = ""
+//            binding.tvLanguage.setOnClickListener {
+//                activity?.recreate()
+//            }
+//        }
 
 
-    }
+//    }
 
     private fun setUserInfo() {
         if (auth.currentUser != null) {
@@ -50,7 +51,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun setListeners() {
         if (auth.currentUser != null) {
             binding.apply {
-                tvLoginLogout.text = getString(R.string.login)
+                tvLoginLogout.text = getString(R.string.logout)
                 tvLoginLogout.setOnClickListener {
                     auth.signOut()
                     activity?.recreate()
@@ -65,6 +66,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 }
             }
 
+        }
+
+        binding.tvLanguage.setOnClickListener {
+            activity?.findNavController(R.id.mainContainer)?.navigate(R.id.languageChangeDialogFragment)
         }
 
     }

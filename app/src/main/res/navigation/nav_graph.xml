@@ -83,6 +83,14 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/languageChangeDialogFragment"
+        android:name="com.example.breakingbad.ui.language.LanguageChangeDialogFragment"
+        android:label="LanguageChangeDialogFragment" />
+
+    <action
+        android:id="@+id/toLanguageChangeDialogFragment"
+        app:destination="@id/languageChangeDialogFragment"/>
 
 
 </navigation>

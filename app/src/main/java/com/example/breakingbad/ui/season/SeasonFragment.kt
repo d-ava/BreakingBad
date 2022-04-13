@@ -32,16 +32,16 @@ class SeasonFragment : BaseFragment<FragmentSeasonBinding>(FragmentSeasonBinding
 
 
     override fun start() {
-        setListeners()
 
         getEpisodes()
         setRecycler()
         setTitle()
+        setListeners()
     }
 
     private fun setTitle() {
         val series = args.series
-        binding.tvSeason.text = "SEASON ${series[0]}"  //need to solve this. but not now
+        binding.tvSeason.text = getString(R.string.season) + " ${series[0]}"  //need to solve this. but not now
     }
 
     private fun setRecycler() {

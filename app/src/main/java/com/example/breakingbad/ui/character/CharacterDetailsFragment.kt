@@ -16,6 +16,7 @@ import com.example.breakingbad.extensions.makeSnackbar
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.util.Resource
 import com.example.breakingbad.util.Utils
+import com.example.breakingbad.util.Utils.auth
 import com.example.breakingbad.util.Utils.convertStringToListOfInt
 import com.example.breakingbad.util.Utils.savedCharacterslist
 import com.squareup.picasso.Picasso
@@ -48,7 +49,11 @@ class CharacterDetailsFragment :
 
 
         getQuotes()
-        loadSavedCharacters()
+        if (auth.currentUser != null){
+
+            loadSavedCharacters()
+        }
+//        auth.currentUser?.let { loadSavedCharacters() }
 
         setListeners()
 
