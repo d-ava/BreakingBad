@@ -28,6 +28,7 @@ class CharactersRepository @Inject constructor(
                     emit(Resource.Success(body))
                     bbDao.insertCharacters(body)
                 } else {
+
                     emit(Resource.Error("unknown error"))
                 }
             } catch (e: IOException) {

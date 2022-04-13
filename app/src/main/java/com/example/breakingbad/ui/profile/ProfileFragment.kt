@@ -17,16 +17,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
         changeLanguage()
 
-//        binding.tvLanguage.setOnClickListener {
-//            lang = "ka"
-//
-//            activity?.recreate()
-//        }
-//
-//        binding.tvEnglishLanguage.setOnClickListener {
-//            lang = ""
-//            activity?.recreate()
-//        }
+
 
     }
 

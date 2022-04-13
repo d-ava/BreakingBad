@@ -29,5 +29,14 @@ class LoginViewModel @Inject constructor(private val repository: FirebaseReposit
     }
 
 
+//    fun loginUser01(email:String, password:String){
+//        viewModelScope.launch {
+//            if (email.isNullOrEmpty() )
+//        }
+//
+//
+//    }
+
+
 
 }

@@ -60,6 +60,39 @@ class FirebaseRepository @Inject constructor() {
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun registerUser02(
+        name: String,
+        email: String,
+        password: String,
+        repeatPassword: String
+    ): Flow<Resource<AuthResult>> {
+        return flow {
+            try {
+                emit(Resource.Loading())
+                val registrationResult =
+                    auth.createUserWithEmailAndPassword(email, password).await()
+
+                val userId = registrationResult.user?.uid!!
+                val newUser = User(
+                    name = name,
+                    email = email,
+                    characterId = "0"
+                )
+                databaseReference.child(userId).setValue(newUser)
+                emit(Resource.Success(registrationResult))
+
+
+            } catch (e: FirebaseNetworkException) {
+                emit(Resource.Error(e.message ?: "network connection error"))
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message ?: "unknown error"))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+
+
+
     suspend fun registerUser(
         name: String,
         email: String,
