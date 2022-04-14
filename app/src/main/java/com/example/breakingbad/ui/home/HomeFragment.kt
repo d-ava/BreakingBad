@@ -41,14 +41,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun start() {
 
-//        checkAndLoadCharacters()
+        checkAndLoadCharacters()
         setRecycler()
         if (auth.currentUser != null){
             loadSavedCharacters()
             Log.d("---", "saved characters list home-> ${Utils.savedCharacterslist}")
         }
 //
-        getCharacters()
+//        getCharacters()
 
 
     }
@@ -96,6 +96,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
+    private fun getCharactersFromRoom(){
+        sharedViewModel.loadCharactersFromRoom()
+        lifecycleScope.launchWhenStarted {
+            sharedViewModel.loadCharactersFromRoom.collect {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+//                            Log.d ("---", "getCharacters loading")
+                    }
+                    is Resource.Success -> {
+                        hideLoading()
+                        bbadapter.setData(it.data!!)
+//                            Log.d ("---", "getCharacters ${it.data}")
+                    }
+                    is Resource.Error -> {
+                        hideLoading()
+                        view?.makeSnackbar(it.message!!)
+                    }
+                    else -> {Unit}
+                }
+
+            }
+
+        }
+    }
+
 
 
     private fun setRecycler() {
@@ -114,8 +140,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun checkAndLoadCharacters(){
         if (checkForInternet(requireContext())){
             view?.makeSnackbar("loading from internet")
+            getCharacters()
         }else{
             view?.makeSnackbar("no internet, loading cashed data")
+            getCharactersFromRoom()
+
         }
     }
 

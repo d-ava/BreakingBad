@@ -20,7 +20,7 @@ class CharactersRepository @Inject constructor(
     fun getCharacters(): Flow<Resource<List<BBCharacter>>?> {
         return flow {
             try {
-                emit(getCharactersCashed())
+//                emit(getCharactersCashed())
                 emit(Resource.Loading())
                 val response = charactersApi.getBBCharacters()
                 val body = response.body()
@@ -39,30 +39,41 @@ class CharactersRepository @Inject constructor(
 
     }
 
+    fun getCharactersFromRoom(): Flow<Resource<List<BBCharacter>>?> {
+        return flow {
+            try {
+                emit(getCharactersCashed())
+
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message ?: "unknown message"))
+            }
+        }.flowOn(Dispatchers.IO)
+
+    }
+
     private fun getCharactersCashed(): Resource<List<BBCharacter>>? {
         return bbDao.getAllCharacters()?.let {
             Resource.Success(it)
         }
     }
 
-    fun getCharacterById(id:Int):Flow<Resource<BBCharacter>?>{
-        return flow{
+    fun getCharacterById(id: Int): Flow<Resource<BBCharacter>?> {
+        return flow {
             try {
                 emit(Resource.Loading())
                 emit(getCharacterByIdCashed(id))
 
-            }catch (e:Exception){
-                emit(Resource.Error(e.message?:"unknown error"))
+            } catch (e: Exception) {
+                emit(Resource.Error(e.message ?: "unknown error"))
             }
         }.flowOn(Dispatchers.IO)
     }
 
-    private fun getCharacterByIdCashed(id:Int):Resource<BBCharacter>?{
+    private fun getCharacterByIdCashed(id: Int): Resource<BBCharacter>? {
         return bbDao.getCharacterById(id)?.let {
             Resource.Success(it)
         }
     }
-
 
 
 }

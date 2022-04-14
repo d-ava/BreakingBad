@@ -20,6 +20,21 @@ class CharactersViewModel @Inject constructor(private val repository: Characters
     val loadCharacters: SharedFlow<Resource<List<BBCharacter>>?> =
         repository.getCharacters().shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 
+    //load characters from room
+    private val _loadCharactersFromRoom:MutableSharedFlow<Resource<List<BBCharacter>>> = MutableSharedFlow()
+    val loadCharactersFromRoom: SharedFlow<Resource<List<BBCharacter>>> = _loadCharactersFromRoom
+
+    fun loadCharactersFromRoom(){
+        viewModelScope.launch {
+            repository.getCharactersFromRoom().collect {
+                _loadCharactersFromRoom.emit(it!!)
+            }
+        }
+    }
+
+
+
+
 
     //load saved characters
 

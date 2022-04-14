@@ -10,7 +10,7 @@ interface BBCharactersApi {
     @GET("characters")
     suspend fun getBBCharacters(
         @Query("limit") limit: Int = 10,
-        @Query("offset") offset: Int = 0
+        @Query("offset") offset: Int = 6
     ): Response<List<BBCharacter>>
 
 
