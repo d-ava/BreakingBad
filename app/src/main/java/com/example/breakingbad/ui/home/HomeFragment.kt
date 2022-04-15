@@ -26,32 +26,61 @@ import com.example.breakingbad.util.Utils.auth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-//var bbQuotes: List<BBQuotes> = listOf()
+
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private lateinit var bbadapter: BBAdapter
 
-
+    private lateinit var characterPagingAdapter: BBPagingAdapter
     private val sharedViewModel: CharactersViewModel by activityViewModels()
 
     override fun start() {
 
-        checkAndLoadCharacters()
-        setRecycler()
-        if (auth.currentUser != null){
+        if (auth.currentUser != null) {
             loadSavedCharacters()
-            Log.d("---", "saved characters list home-> ${Utils.savedCharacterslist}")
         }
-//
-//        getCharacters()
+
+        setRecycler()
+        checkAndLoadCharacters()
+        getCharacters()
+
+
+
+//        setRecyclerPager()
+//        getCharactersUsingPager()
 
 
     }
+
+    private fun setRecyclerPager() {
+        characterPagingAdapter = BBPagingAdapter {
+            val action = CharacterDetailsFragmentDirections.toCharacterDetailsFragment(it)
+            activity?.findNavController(R.id.mainContainer)?.navigate(action)
+        }
+        binding.apply {
+            recycler.layoutManager = GridLayoutManager(requireContext(), 2)
+            recycler.adapter = characterPagingAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter()
+            )
+        }
+    }
+
+    private fun getCharactersUsingPager() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            sharedViewModel.loadCharactersUsingPaging().collectLatest {
+                characterPagingAdapter.submitData(it)
+            }
+        }
+
+
+    }
+
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun loadSavedCharacters() {
@@ -61,13 +90,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 sharedViewModel.loadSavedCharactersList.collect {
                     Log.d("---", "user info -> $it")
-                    Utils.authUserInfo =it
+                    Utils.authUserInfo = it
                 }
             }
         }
 
     }
-
 
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
@@ -89,14 +117,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                             hideLoading()
                             view?.makeSnackbar(it.message!!)
                         }
-                        else -> {Unit}
+                        else -> {
+                            Unit
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun getCharactersFromRoom(){
+    private fun getCharactersFromRoom() {
         sharedViewModel.loadCharactersFromRoom()
         lifecycleScope.launchWhenStarted {
             sharedViewModel.loadCharactersFromRoom.collect {
@@ -114,7 +144,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         hideLoading()
                         view?.makeSnackbar(it.message!!)
                     }
-                    else -> {Unit}
+                    else -> {
+                        Unit
+                    }
                 }
 
             }
@@ -123,25 +155,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
 
-
     private fun setRecycler() {
         bbadapter = BBAdapter {
             val action = CharacterDetailsFragmentDirections.toCharacterDetailsFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
-//            view?.makeSnackbar("name is ${it.nickname}")
-//            showDialogMain(R.string.app_name, R.string.error)
         }
         binding.recycler.apply {
             adapter = bbadapter
             layoutManager = GridLayoutManager(requireContext(), 2)
+
         }
     }
 
-    private fun checkAndLoadCharacters(){
-        if (checkForInternet(requireContext())){
+    private fun checkAndLoadCharacters() {
+        if (checkForInternet(requireContext())) {
             view?.makeSnackbar("loading from internet")
             getCharacters()
-        }else{
+        } else {
             view?.makeSnackbar("no internet, loading cashed data")
             getCharactersFromRoom()
 
@@ -187,8 +217,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             return networkInfo.isConnected
         }
     }
-
-
 
 
 }

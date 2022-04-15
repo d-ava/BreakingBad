@@ -2,10 +2,14 @@ package com.example.breakingbad.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.model.User
 import com.example.breakingbad.repository.CharactersRepository
 import com.example.breakingbad.repository.FirebaseRepository
+import com.example.breakingbad.ui.home.BBPagingSource
 import com.example.breakingbad.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -57,6 +61,15 @@ class CharactersViewModel @Inject constructor(private val repository: Characters
             }
         }
     }
+
+    //paging
+
+    fun loadCharactersUsingPaging()= Pager(
+        config= PagingConfig(1),
+        pagingSourceFactory = {
+            BBPagingSource()
+        }
+    ).flow.cachedIn(viewModelScope)
 
 
 }

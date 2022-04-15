@@ -43,12 +43,12 @@ class CharacterDetailsFragment :
 
     override fun start() {
 
-        intList = convertStringToListOfInt(savedCharacterslist)
         setCharacterInformation()
         setRecycler()
-
-
         getQuotes()
+        intList = convertStringToListOfInt(savedCharacterslist)
+
+
         if (auth.currentUser != null){
 
             loadSavedCharacters()
@@ -57,7 +57,7 @@ class CharacterDetailsFragment :
 
         setListeners()
 
-        Log.d("---", "saved characters list chdetail-> ${Utils.savedCharacterslist}")
+
 
     }
 

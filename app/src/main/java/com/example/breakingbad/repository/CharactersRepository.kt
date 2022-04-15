@@ -1,5 +1,6 @@
 package com.example.breakingbad.repository
 
+import android.util.Log
 import com.example.breakingbad.api.BBCharactersApi
 import com.example.breakingbad.db.BBDao
 import com.example.breakingbad.model.BBCharacter
@@ -17,6 +18,7 @@ class CharactersRepository @Inject constructor(
 ) {
 
 
+
     fun getCharacters(): Flow<Resource<List<BBCharacter>>?> {
         return flow {
             try {
@@ -25,14 +27,19 @@ class CharactersRepository @Inject constructor(
                 val response = charactersApi.getBBCharacters()
                 val body = response.body()
                 if (response.isSuccessful && body != null) {
+//
+
                     emit(Resource.Success(body))
                     bbDao.insertCharacters(body)
                 } else {
 
                     emit(Resource.Error("unknown error"))
+
                 }
             } catch (e: IOException) {
+
                 emit(Resource.Error(e.message ?: "unknown error"))
+
             }
         }.flowOn(Dispatchers.IO)
 

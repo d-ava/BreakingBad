@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/bb_white</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_brba_splash</item>
+<!--<item name="backgroundColor">@color/bb_active_color</item>-->
+
+
+
+
+
+        <item name="postSplashScreenTheme">@style/Theme.BreakingBad</item>
+    </style>
+</resources>
