@@ -169,10 +169,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun checkAndLoadCharacters() {
         if (checkForInternet(requireContext())) {
-            view?.makeSnackbar("loading from internet")
+//            view?.makeSnackbar("loading from internet")
             getCharacters()
         } else {
-            view?.makeSnackbar("no internet, loading cashed data")
+//            view?.makeSnackbar("no internet, loading cashed data")
             getCharactersFromRoom()
 
         }
