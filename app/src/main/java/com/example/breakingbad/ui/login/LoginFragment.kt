@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.breakingbad.R
 import com.example.breakingbad.databinding.FragmentLoginBinding
 import com.example.breakingbad.extensions.makeSnackbar
@@ -25,24 +26,32 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    private val viewmodel:LoginViewModel by viewModels()
-
+    private val viewmodel: LoginViewModel by viewModels()
+//    private val args: LoginFragmentArgs by navArgs()
 
     override fun start() {
 
 
         setListeners()
+//        fillFields()
     }
 
+//    private fun fillFields(){
+//        binding.apply {
+//            etEmail.setText(args.registeredUserInformation.email)
+//            etPassword.setText(args.registeredUserInformation.password)
+//        }
+//    }
+
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun logInUser(){
+    private fun logInUser() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         viewmodel.logInUser(email, password)
         viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewmodel.login.collect {
-                    when(it){
+                    when (it) {
                         is Resource.Loading -> {
                             showLoading()
                         }

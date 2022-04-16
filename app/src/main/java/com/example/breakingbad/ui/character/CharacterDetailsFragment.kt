@@ -2,6 +2,7 @@ package com.example.breakingbad.ui.character
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -46,18 +47,26 @@ class CharacterDetailsFragment :
         setCharacterInformation()
         setRecycler()
         getQuotes()
-        intList = convertStringToListOfInt(savedCharacterslist)
 
 
-        if (auth.currentUser != null){
+        checkCurrentUser()
 
-            loadSavedCharacters()
-        }
-//        auth.currentUser?.let { loadSavedCharacters() }
+
 
         setListeners()
 
 
+    }
+
+    private fun checkCurrentUser() {
+        if (auth.currentUser != null) {
+
+            loadSavedCharacters()
+            intList = convertStringToListOfInt(savedCharacterslist)
+
+        } else {
+            binding.btnAddRemove.visibility = View.INVISIBLE
+        }
 
     }
 
@@ -97,8 +106,6 @@ class CharacterDetailsFragment :
     }
 
 
-
-
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun saveRemoveCharacter(newList: String) {
 
@@ -124,7 +131,6 @@ class CharacterDetailsFragment :
             }
         }
     }
-
 
 
     @SuppressLint("UnsafeRepeatOnLifecycleDetector")
@@ -216,7 +222,6 @@ class CharacterDetailsFragment :
 
             }
         }
-
 
 
     }
