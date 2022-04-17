@@ -1,8 +1,6 @@
 package com.example.breakingbad.ui.saved
 
 import android.annotation.SuppressLint
-import android.util.Log
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,10 +10,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.breakingbad.R
 import com.example.breakingbad.databinding.FragmentSavedBinding
 import com.example.breakingbad.extensions.makeSnackbar
+import com.example.breakingbad.extensions.showDialogMain
 import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.ui.BaseFragment
 import com.example.breakingbad.ui.character.CharacterDetailsFragmentDirections
-import com.example.breakingbad.ui.character.intList
 import com.example.breakingbad.ui.home.BBAdapter
 import com.example.breakingbad.ui.viewModel.CharactersViewModel
 import com.example.breakingbad.util.Resource
@@ -41,7 +39,8 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>(FragmentSavedBinding::i
             setRecycler()
             getCharacters()
         }else{
-            view?.makeSnackbar(getString(R.string.first_login))
+//            view?.makeSnackbar(getString(R.string.first_login))
+            showDialogMain(R.string.error, R.string.first_login)
         }
 
 
@@ -59,7 +58,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>(FragmentSavedBinding::i
                         }
                         is Resource.Success -> {
                             hideLoading()
-                            var newSavedList:MutableList<BBCharacter> = mutableListOf()
+                            val newSavedList:MutableList<BBCharacter> = mutableListOf()
                             for (id in it.data!!){
                                 if (newSavedCharacterIdList.contains(id.charId)){
                                     newSavedList.add(id)
