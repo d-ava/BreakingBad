@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.breakingbad.model.BBCharacter
 import com.example.breakingbad.model.User
@@ -64,12 +65,13 @@ class CharactersViewModel @Inject constructor(private val repository: Characters
 
     //paging
 
-    fun loadCharactersUsingPaging()= Pager(
-        config= PagingConfig(1),
-        pagingSourceFactory = {
-            BBPagingSource()
-        }
-    ).flow.cachedIn(viewModelScope)
-
+    fun loadCharactersUsingPaging():Flow<PagingData<BBCharacter>> {
+       return Pager(
+            config = PagingConfig(1),
+            pagingSourceFactory = {
+                BBPagingSource()
+            }
+        ).flow.cachedIn(viewModelScope)
+    }
 
 }
